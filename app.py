@@ -493,12 +493,13 @@ def light_chart(fig, height=235):
 # ============================================================
 # TOP HEADER BAR: "Civicguard"
 # ============================================================
-hdr_c1, hdr_c2, hdr_c3 = st.columns([2.8, 1.5, 1.5])
+hdr_c1, hdr_c2, hdr_c3 = st.columns([3.2, 1.4, 1.4])
 
 with hdr_c1:
     st.markdown("""
     <div class="brand-wrap">
-        <div style="font-size:36px; line-height:1;">🛡️</div>
+        <img src="https://manabuki.in/wp-content/uploads/2024/12/Vignan-Logo-1.png" style="height:48px; max-width:140px; object-fit:contain; margin-right:4px;" alt="Vignan Logo" />
+        <div style="font-size:32px; line-height:1;">🛡️</div>
         <div class="brand-title">Civic<span>guard</span></div>
     </div>
     """, unsafe_allow_html=True)
