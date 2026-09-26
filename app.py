@@ -118,30 +118,31 @@ def get_city_profile(city_name):
 
     h = sum(ord(c) for c in str(city_name))
     
-    base_rainfall = 120 + (h % 280)
-    base_water_level = round(3.5 + (h % 90) / 10.0, 1)
-    base_temp = 24 + (h % 16)
-    base_humidity = 45 + (h % 50)
+    # Realistic Normal/Calm Baselines for Indian Cities (Sunny/Optimal defaults)
+    base_rainfall = 5 + (h % 25)              # 5 to 29 mm (dry/normal sunny weather)
+    base_water_level = round(1.5 + (h % 15) / 10.0, 1)  # 1.5 to 2.9 m (safe river/reservoir baseline)
+    base_temp = 30 + (h % 9)                  # 30 to 38 °C (realistic sunny Indian city temp)
+    base_humidity = 42 + (h % 22)             # 42 to 63 % (moderate humidity)
     
-    base_traffic = 3500 + (h % 8000)
-    base_speed = 22 + (h % 35)
-    base_sensors = 250 + (h % 950)
-    base_energy = 450 + (h % 700)
+    base_traffic = 2200 + (h % 2500)          # 2200 to 4600 v/h (normal smooth flow)
+    base_speed = 42 + (h % 18)                # 42 to 59 km/h (optimal transit speed)
+    base_sensors = 500 + (h % 400)            # 500 to 899 active nodes
+    base_energy = 380 + (h % 300)             # 380 to 679 MWh
     
-    base_rev = 1200 + (h % 4500)
-    base_exp = int(base_rev * (0.65 + (h % 30) / 100.0))
-    base_inv = int(base_rev * 0.25)
-    base_mkt = int(base_rev * 1.8)
+    base_rev = 3500 + (h % 3000)              # ₹3500 to ₹6499 Lakhs
+    base_exp = int(base_rev * (0.60 + (h % 15) / 100.0))  # Healthy fiscal surplus margin
+    base_inv = int(base_rev * 0.20)
+    base_mkt = int(base_rev * 2.2)
     
-    base_cyber_traffic = 350 + (h % 1600)
-    base_logins = 20 + (h % 220)
-    base_threats = 5 + (h % 45)
-    base_packets = 80 + (h % 380)
+    base_cyber_traffic = 350 + (h % 450)      # 350 to 799 MB/s
+    base_logins = 5 + (h % 18)                # 5 to 22 failed attempts/hr (safe)
+    base_threats = 1 + (h % 3)                # 1 to 3 threats (safe baseline)
+    base_packets = 60 + (h % 80)              # 60 to 139 k/s
     
-    base_followers = 45000 + (h % 450000)
-    base_likes = 1200 + (h % 15000)
-    base_comments = 150 + (h % 1800)
-    base_eng = round(2.5 + (h % 65) / 10.0, 1)
+    base_followers = 65000 + (h % 250000)
+    base_likes = 2500 + (h % 6000)
+    base_comments = 280 + (h % 900)
+    base_eng = round(4.2 + (h % 35) / 10.0, 1)
     
     pm25_default = int(pollutants.get("PM2.5") or (city_aqi * 0.65))
     pm10_default = int(pollutants.get("PM10") or (city_aqi * 1.15))
@@ -357,53 +358,6 @@ st.markdown("""
         text-align: left;
     }
     
-    /* Modern Parameter Input Card */
-    .param-widget-card {
-        background: #ffffff;
-        border: 1.5px solid #e2e8f0;
-        border-radius: 12px;
-        padding: 12px 14px 10px 14px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
-        margin-bottom: 6px;
-        transition: all 0.2s ease-in-out;
-    }
-    .param-widget-card:hover {
-        border-color: #0284c7;
-        box-shadow: 0 4px 14px rgba(2, 132, 199, 0.09);
-    }
-    .param-widget-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 6px;
-    }
-    .param-widget-title {
-        font-size: 12.5px;
-        font-weight: 700;
-        color: #0f172a;
-        display: flex;
-        align-items: center;
-        gap: 5px;
-    }
-    .param-widget-badge {
-        font-size: 10.5px;
-        font-weight: 600;
-        color: #0369a1;
-        background: #f0f9ff;
-        border: 1px solid #bae6fd;
-        padding: 2px 7px;
-        border-radius: 6px;
-        white-space: nowrap;
-    }
-    .param-widget-footer {
-        font-size: 11px;
-        color: #64748b;
-        margin-top: 4px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
     /* Clean Light Streamlit Controls */
     div[data-baseweb="select"] > div {
         background-color: #ffffff !important;
@@ -413,18 +367,6 @@ st.markdown("""
     }
     .stSlider > div {
         color: #0284c7 !important;
-    }
-    div[data-testid="stSlider"] div[role="slider"] {
-        background-color: #0284c7 !important;
-        border: 2px solid #ffffff !important;
-        box-shadow: 0 2px 6px rgba(2, 132, 199, 0.35) !important;
-    }
-    div[data-testid="stSlider"] [data-testid="stThumbValue"] {
-        color: #0284c7 !important;
-        font-weight: 700 !important;
-    }
-    div[data-testid="stSlider"] div[data-baseweb="slider"] div {
-        background-color: #0284c7 !important;
     }
     .stButton > button {
         background: linear-gradient(90deg, #0284c7 0%, #0369a1 100%) !important;
@@ -575,517 +517,89 @@ with hdr_c3:
 city_prof = get_city_profile(selected_city)
 
 # ============================================================
-# MAIN USER INPUT CARD: "🎯 Interactive Parameter Simulator"
+# MAIN USER INPUT CARD: "🎯 Analyze Your Data"
 # ============================================================
-theme_map = {
-    "🚨 Disaster Management": "disaster",
-    "🏙️ Smart City": "smart_city",
-    "💰 Finance & Business": "finance",
-    "🛡️ Cyber & Network": "cyber",
-    "📱 Social Media": "social",
-    "🌱 Environment": "environment"
-}
-t_key = theme_map.get(selected_theme, "disaster")
-
-# Simulator Header Bar with Quick Scenario Presets
-sim_top_c1, sim_top_c2 = st.columns([3, 1.5])
-with sim_top_c1:
-    st.markdown(f"""
-    <div style="padding: 4px 0 2px 0;">
-        <div style="font-size:14.5px; font-weight:800; color:#0f172a; display:flex; align-items:center; gap:8px;">
-            <span>🎯 Parameter Simulator</span>
-            <span style="font-size:11px; font-weight:700; color:#0284c7; background:#e0f2fe; padding:2px 8px; border-radius:6px; border:1px solid #bae6fd;">📍 {selected_city} ({city_prof['state']})</span>
-        </div>
-        <div style="font-size:11px; color:#64748b; margin-top:2px;">Adjust live indicators or choose a scenario preset to test AI resilience triggers.</div>
+st.markdown(f"""
+<div class="glass-card" style="margin-top: 6px;">
+    <div style="font-size:14px; font-weight:700; color:#0f172a; margin-bottom:4px;">
+        🎯 Analyze Your Data — <span style="color:#0284c7;">{selected_city}</span> <span style="font-size:11.5px; color:#64748b; font-weight:500;">({city_prof['state']})</span>
     </div>
-    """, unsafe_allow_html=True)
+</div>
+""", unsafe_allow_html=True)
 
-with sim_top_c2:
-    sim_preset = st.selectbox(
-        "Simulation Mode",
-        ["📍 Normal Baseline", "⚡ Stress Spike (+35%)", "⚠️ Crisis / Surge (+70%)", "🌱 Low Footprint (-25%)"],
-        index=0,
-        label_visibility="collapsed",
-        key=f"sim_preset_{selected_city}_{t_key}"
-    )
-
-mult = 1.35 if "Stress" in sim_preset else 1.70 if "Crisis" in sim_preset else 0.75 if "Low Footprint" in sim_preset else 1.0
-
-# 4 Interactive Parameter Cards
+# Dynamic Inputs According to Selected Theme
 col1, col2, col3, col4 = st.columns(4)
 
 if selected_theme == "🚨 Disaster Management":
-    v1_def = min(500, max(0, int(city_prof["rainfall"] * mult)))
-    v2_def = min(50, max(10, int(city_prof["temp"] * (mult if mult > 1 else 1.0))))
-    v3_def = min(100, max(10, int(city_prof["humidity"] * mult)))
-    v4_def = min(15.0, max(0.0, round(float(city_prof["water_level"] * mult), 1)))
-
+    t_key = "disaster"
     with col1:
-        st.markdown(f"""
-        <div class="param-widget-card">
-            <div class="param-widget-header">
-                <span class="param-widget-title">🌧️ Rainfall Inflow</span>
-                <span class="param-widget-badge">Base: {city_prof['rainfall']} mm</span>
-            </div>
-        """, unsafe_allow_html=True)
-        in_1 = st.slider("Rainfall (mm)", 0, 500, v1_def, label_visibility="collapsed", key=f"dm_rf_{selected_city}_{sim_preset}")
-        st.markdown(f"""
-            <div class="param-widget-footer">
-                <span>0 mm</span>
-                <span style="font-weight:700; color:#0284c7;">Val: {in_1} mm</span>
-                <span>500 mm</span>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-
+        in_1 = st.slider("Rainfall Inflow (mm)", 0, 500, int(city_prof["rainfall"]), key=f"dm_rf_{selected_city}")
     with col2:
-        st.markdown(f"""
-        <div class="param-widget-card">
-            <div class="param-widget-header">
-                <span class="param-widget-title">🌡️ Temperature</span>
-                <span class="param-widget-badge">Base: {city_prof['temp']} °C</span>
-            </div>
-        """, unsafe_allow_html=True)
-        in_2 = st.slider("Temperature (°C)", 10, 50, v2_def, label_visibility="collapsed", key=f"dm_tmp_{selected_city}_{sim_preset}")
-        st.markdown(f"""
-            <div class="param-widget-footer">
-                <span>10 °C</span>
-                <span style="font-weight:700; color:#0284c7;">Val: {in_2} °C</span>
-                <span>50 °C</span>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-
+        in_2 = st.slider("Temperature (°C)", 10, 50, int(city_prof["temp"]), key=f"dm_tmp_{selected_city}")
     with col3:
-        st.markdown(f"""
-        <div class="param-widget-card">
-            <div class="param-widget-header">
-                <span class="param-widget-title">💧 Humidity</span>
-                <span class="param-widget-badge">Base: {city_prof['humidity']} %</span>
-            </div>
-        """, unsafe_allow_html=True)
-        in_3 = st.slider("Humidity (%)", 10, 100, v3_def, label_visibility="collapsed", key=f"dm_hum_{selected_city}_{sim_preset}")
-        st.markdown(f"""
-            <div class="param-widget-footer">
-                <span>10 %</span>
-                <span style="font-weight:700; color:#0284c7;">Val: {in_3} %</span>
-                <span>100 %</span>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-
+        in_3 = st.slider("Humidity (%)", 10, 100, int(city_prof["humidity"]), key=f"dm_hum_{selected_city}")
     with col4:
-        st.markdown(f"""
-        <div class="param-widget-card">
-            <div class="param-widget-header">
-                <span class="param-widget-title">🌊 Water Level / Surge</span>
-                <span class="param-widget-badge">Base: {city_prof['water_level']} m</span>
-            </div>
-        """, unsafe_allow_html=True)
-        in_4 = st.slider("Water Level (m)", 0.0, 15.0, float(v4_def), step=0.1, label_visibility="collapsed", key=f"dm_wl_{selected_city}_{sim_preset}")
-        st.markdown(f"""
-            <div class="param-widget-footer">
-                <span>0.0 m</span>
-                <span style="font-weight:700; color:#0284c7;">Val: {in_4:.1f} m</span>
-                <span>15.0 m</span>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
+        in_4 = st.slider("Water Level / Surge (m)", 0.0, 15.0, float(city_prof["water_level"]), step=0.1, key=f"dm_wl_{selected_city}")
 
 elif selected_theme == "🏙️ Smart City":
-    v1_def = min(15000, max(500, int(city_prof["traffic"] * mult)))
-    v2_def = min(90, max(5, int(city_prof["speed"] / (mult if mult > 1 else 0.85))))
-    v3_def = min(2000, max(50, int(city_prof["sensors"] * mult)))
-    v4_def = min(2000, max(50, int(city_prof["energy"] * mult)))
-
+    t_key = "smart_city"
     with col1:
-        st.markdown(f"""
-        <div class="param-widget-card">
-            <div class="param-widget-header">
-                <span class="param-widget-title">🚗 Traffic Volume</span>
-                <span class="param-widget-badge">Base: {city_prof['traffic']} v/h</span>
-            </div>
-        """, unsafe_allow_html=True)
-        in_1 = st.slider("Traffic (v/h)", 500, 15000, v1_def, step=100, label_visibility="collapsed", key=f"sc_tr_{selected_city}_{sim_preset}")
-        st.markdown(f"""
-            <div class="param-widget-footer">
-                <span>500 v/h</span>
-                <span style="font-weight:700; color:#0284c7;">Val: {in_1} v/h</span>
-                <span>15k v/h</span>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-
+        in_1 = st.slider("Traffic Volume (Vehicles/hr)", 500, 15000, int(city_prof["traffic"]), step=100, key=f"sc_tr_{selected_city}")
     with col2:
-        st.markdown(f"""
-        <div class="param-widget-card">
-            <div class="param-widget-header">
-                <span class="param-widget-title">⚡ Average Speed</span>
-                <span class="param-widget-badge">Base: {city_prof['speed']} km/h</span>
-            </div>
-        """, unsafe_allow_html=True)
-        in_2 = st.slider("Speed (km/h)", 5, 90, v2_def, label_visibility="collapsed", key=f"sc_sp_{selected_city}_{sim_preset}")
-        st.markdown(f"""
-            <div class="param-widget-footer">
-                <span>5 km/h</span>
-                <span style="font-weight:700; color:#0284c7;">Val: {in_2} km/h</span>
-                <span>90 km/h</span>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-
+        in_2 = st.slider("Average Speed (km/h)", 5, 90, int(city_prof["speed"]), key=f"sc_sp_{selected_city}")
     with col3:
-        st.markdown(f"""
-        <div class="param-widget-card">
-            <div class="param-widget-header">
-                <span class="param-widget-title">📡 IoT Grid Sensors</span>
-                <span class="param-widget-badge">Base: {city_prof['sensors']} Nodes</span>
-            </div>
-        """, unsafe_allow_html=True)
-        in_3 = st.number_input("Sensors (Nodes)", 50, 2000, v3_def, step=50, label_visibility="collapsed", key=f"sc_sen_{selected_city}_{sim_preset}")
-        st.markdown(f"""
-            <div class="param-widget-footer">
-                <span>Active Nodes</span>
-                <span style="font-weight:700; color:#0284c7;">Val: {in_3} Nodes</span>
-                <span>IoT Grid</span>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-
+        in_3 = st.number_input("IoT Grid Sensors (Nodes)", value=int(city_prof["sensors"]), step=50, key=f"sc_sen_{selected_city}")
     with col4:
-        st.markdown(f"""
-        <div class="param-widget-card">
-            <div class="param-widget-header">
-                <span class="param-widget-title">💡 Grid Energy Usage</span>
-                <span class="param-widget-badge">Base: {city_prof['energy']} MWh</span>
-            </div>
-        """, unsafe_allow_html=True)
-        in_4 = st.slider("Energy (MWh)", 50, 2000, v4_def, label_visibility="collapsed", key=f"sc_eng_{selected_city}_{sim_preset}")
-        st.markdown(f"""
-            <div class="param-widget-footer">
-                <span>50 MWh</span>
-                <span style="font-weight:700; color:#0284c7;">Val: {in_4} MWh</span>
-                <span>2000 MWh</span>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
+        in_4 = st.slider("Grid Energy Usage (MWh)", 50, 2000, int(city_prof["energy"]), key=f"sc_eng_{selected_city}")
 
 elif selected_theme == "💰 Finance & Business":
-    v1_def = int(city_prof["revenue"] * mult)
-    v2_def = int(city_prof["expenses"] * mult)
-    v3_def = int(city_prof["investment"] * mult)
-    v4_def = int(city_prof["market_val"] * mult)
-
+    t_key = "finance"
     with col1:
-        st.markdown(f"""
-        <div class="param-widget-card">
-            <div class="param-widget-header">
-                <span class="param-widget-title">📈 Municipal Revenue</span>
-                <span class="param-widget-badge">Base: ₹{city_prof['revenue']}L</span>
-            </div>
-        """, unsafe_allow_html=True)
-        in_1 = st.number_input("Revenue (₹ Lakhs)", 100, 20000, v1_def, step=100, label_visibility="collapsed", key=f"f_rev_{selected_city}_{sim_preset}")
-        st.markdown(f"""
-            <div class="param-widget-footer">
-                <span>Inflow Cap</span>
-                <span style="font-weight:700; color:#0284c7;">₹{in_1:,} Lakhs</span>
-                <span>Treasury</span>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-
+        in_1 = st.number_input("Revenue (₹ Lakhs)", value=int(city_prof["revenue"]), step=100, key=f"f_rev_{selected_city}")
     with col2:
-        st.markdown(f"""
-        <div class="param-widget-card">
-            <div class="param-widget-header">
-                <span class="param-widget-title">📉 Operational Expenses</span>
-                <span class="param-widget-badge">Base: ₹{city_prof['expenses']}L</span>
-            </div>
-        """, unsafe_allow_html=True)
-        in_2 = st.number_input("Expenses (₹ Lakhs)", 50, 15000, v2_def, step=100, label_visibility="collapsed", key=f"f_exp_{selected_city}_{sim_preset}")
-        st.markdown(f"""
-            <div class="param-widget-footer">
-                <span>Burn Rate</span>
-                <span style="font-weight:700; color:#0284c7;">₹{in_2:,} Lakhs</span>
-                <span>Opex</span>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-
+        in_2 = st.number_input("Expenses (₹ Lakhs)", value=int(city_prof["expenses"]), step=100, key=f"f_exp_{selected_city}")
     with col3:
-        st.markdown(f"""
-        <div class="param-widget-card">
-            <div class="param-widget-header">
-                <span class="param-widget-title">🏗️ Infrastructure CapEx</span>
-                <span class="param-widget-badge">Base: ₹{city_prof['investment']}L</span>
-            </div>
-        """, unsafe_allow_html=True)
-        in_3 = st.number_input("Investment (₹ Lakhs)", 10, 8000, v3_def, step=50, label_visibility="collapsed", key=f"f_inv_{selected_city}_{sim_preset}")
-        st.markdown(f"""
-            <div class="param-widget-footer">
-                <span>Growth Fund</span>
-                <span style="font-weight:700; color:#0284c7;">₹{in_3:,} Lakhs</span>
-                <span>Allocated</span>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-
+        in_3 = st.number_input("Investment (₹ Lakhs)", value=int(city_prof["investment"]), step=50, key=f"f_inv_{selected_city}")
     with col4:
-        st.markdown(f"""
-        <div class="param-widget-card">
-            <div class="param-widget-header">
-                <span class="param-widget-title">🏛️ Civic Valuation</span>
-                <span class="param-widget-badge">Base: ₹{city_prof['market_val']}L</span>
-            </div>
-        """, unsafe_allow_html=True)
-        in_4 = st.number_input("Market Value (₹ Lakhs)", 200, 50000, v4_def, step=200, label_visibility="collapsed", key=f"f_mkt_{selected_city}_{sim_preset}")
-        st.markdown(f"""
-            <div class="param-widget-footer">
-                <span>Asset Base</span>
-                <span style="font-weight:700; color:#0284c7;">₹{in_4:,} Lakhs</span>
-                <span>Valuation</span>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
+        in_4 = st.number_input("Market Value (₹ Lakhs)", value=int(city_prof["market_val"]), step=200, key=f"f_mkt_{selected_city}")
 
 elif selected_theme == "🛡️ Cyber & Network":
-    v1_def = min(3000, max(50, int(city_prof["cyber_traffic"] * mult)))
-    v2_def = min(500, max(0, int(city_prof["logins"] * mult)))
-    v3_def = min(100, max(0, int(city_prof["threats"] * mult)))
-    v4_def = min(800, max(10, int(city_prof["packets"] * mult)))
-
+    t_key = "cyber"
     with col1:
-        st.markdown(f"""
-        <div class="param-widget-card">
-            <div class="param-widget-header">
-                <span class="param-widget-title">🌐 Network Throughput</span>
-                <span class="param-widget-badge">Base: {city_prof['cyber_traffic']} MB/s</span>
-            </div>
-        """, unsafe_allow_html=True)
-        in_1 = st.slider("Traffic (MB/s)", 50, 3000, v1_def, label_visibility="collapsed", key=f"cb_tr_{selected_city}_{sim_preset}")
-        st.markdown(f"""
-            <div class="param-widget-footer">
-                <span>50 MB/s</span>
-                <span style="font-weight:700; color:#0284c7;">Val: {in_1} MB/s</span>
-                <span>3000 MB/s</span>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-
+        in_1 = st.slider("Network Traffic (MB/s)", 50, 2500, int(city_prof["cyber_traffic"]), key=f"cb_tr_{selected_city}")
     with col2:
-        st.markdown(f"""
-        <div class="param-widget-card">
-            <div class="param-widget-header">
-                <span class="param-widget-title">⚠️ Failed Auth Attempts</span>
-                <span class="param-widget-badge">Base: {city_prof['logins']}/hr</span>
-            </div>
-        """, unsafe_allow_html=True)
-        in_2 = st.slider("Failed Logins (/hr)", 0, 500, v2_def, label_visibility="collapsed", key=f"cb_log_{selected_city}_{sim_preset}")
-        st.markdown(f"""
-            <div class="param-widget-footer">
-                <span>0 /hr</span>
-                <span style="font-weight:700; color:#0284c7;">Val: {in_2} /hr</span>
-                <span>500 /hr</span>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-
+        in_2 = st.slider("Failed Logins (/hr)", 0, 500, int(city_prof["logins"]), key=f"cb_log_{selected_city}")
     with col3:
-        st.markdown(f"""
-        <div class="param-widget-card">
-            <div class="param-widget-header">
-                <span class="param-widget-title">🚨 Active Threat Vectors</span>
-                <span class="param-widget-badge">Base: {city_prof['threats']} Threats</span>
-            </div>
-        """, unsafe_allow_html=True)
-        in_3 = st.slider("Threat Count", 0, 100, v3_def, label_visibility="collapsed", key=f"cb_thr_{selected_city}_{sim_preset}")
-        st.markdown(f"""
-            <div class="param-widget-footer">
-                <span>0 Threats</span>
-                <span style="font-weight:700; color:#0284c7;">Val: {in_3} Threats</span>
-                <span>100 Threats</span>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-
+        in_3 = st.slider("Threat Count", 0, 100, int(city_prof["threats"]), key=f"cb_thr_{selected_city}")
     with col4:
-        st.markdown(f"""
-        <div class="param-widget-card">
-            <div class="param-widget-header">
-                <span class="param-widget-title">📦 Packet Flow Rate</span>
-                <span class="param-widget-badge">Base: {city_prof['packets']} k/s</span>
-            </div>
-        """, unsafe_allow_html=True)
-        in_4 = st.slider("Packet Activity (k/s)", 10, 800, v4_def, label_visibility="collapsed", key=f"cb_pkt_{selected_city}_{sim_preset}")
-        st.markdown(f"""
-            <div class="param-widget-footer">
-                <span>10 k/s</span>
-                <span style="font-weight:700; color:#0284c7;">Val: {in_4} k/s</span>
-                <span>800 k/s</span>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
+        in_4 = st.slider("Packet Activity (k/s)", 10, 600, int(city_prof["packets"]), key=f"cb_pkt_{selected_city}")
 
 elif selected_theme == "📱 Social Media":
-    v1_def = int(city_prof["followers"] * mult)
-    v2_def = int(city_prof["likes"] * mult)
-    v3_def = int(city_prof["comments"] * mult)
-    v4_def = min(20.0, max(0.5, round(float(city_prof["engagement"] * mult), 1)))
-
+    t_key = "social"
     with col1:
-        st.markdown(f"""
-        <div class="param-widget-card">
-            <div class="param-widget-header">
-                <span class="param-widget-title">👥 Citizen Reach</span>
-                <span class="param-widget-badge">Base: {city_prof['followers']:,}</span>
-            </div>
-        """, unsafe_allow_html=True)
-        in_1 = st.number_input("Followers Count", 1000, 2000000, v1_def, step=5000, label_visibility="collapsed", key=f"sm_fol_{selected_city}_{sim_preset}")
-        st.markdown(f"""
-            <div class="param-widget-footer">
-                <span>Audience</span>
-                <span style="font-weight:700; color:#0284c7;">{in_1:,} Reach</span>
-                <span>Citizens</span>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-
+        in_1 = st.number_input("Followers Count", value=int(city_prof["followers"]), step=5000, key=f"sm_fol_{selected_city}")
     with col2:
-        st.markdown(f"""
-        <div class="param-widget-card">
-            <div class="param-widget-header">
-                <span class="param-widget-title">❤️ Engagement Likes</span>
-                <span class="param-widget-badge">Base: {city_prof['likes']:,}/day</span>
-            </div>
-        """, unsafe_allow_html=True)
-        in_2 = st.number_input("Daily Likes", 50, 100000, v2_def, step=200, label_visibility="collapsed", key=f"sm_lik_{selected_city}_{sim_preset}")
-        st.markdown(f"""
-            <div class="param-widget-footer">
-                <span>Appreciation</span>
-                <span style="font-weight:700; color:#0284c7;">{in_2:,} Likes</span>
-                <span>Daily</span>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-
+        in_2 = st.number_input("Daily Likes", value=int(city_prof["likes"]), step=200, key=f"sm_lik_{selected_city}")
     with col3:
-        st.markdown(f"""
-        <div class="param-widget-card">
-            <div class="param-widget-header">
-                <span class="param-widget-title">💬 Citizen Feedback</span>
-                <span class="param-widget-badge">Base: {city_prof['comments']:,}/day</span>
-            </div>
-        """, unsafe_allow_html=True)
-        in_3 = st.number_input("Comments / Day", 10, 20000, v3_def, step=50, label_visibility="collapsed", key=f"sm_com_{selected_city}_{sim_preset}")
-        st.markdown(f"""
-            <div class="param-widget-footer">
-                <span>Discussions</span>
-                <span style="font-weight:700; color:#0284c7;">{in_3:,} Comments</span>
-                <span>Daily</span>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-
+        in_3 = st.number_input("Comments / Day", value=int(city_prof["comments"]), step=50, key=f"sm_com_{selected_city}")
     with col4:
-        st.markdown(f"""
-        <div class="param-widget-card">
-            <div class="param-widget-header">
-                <span class="param-widget-title">📊 Civic Engagement Rate</span>
-                <span class="param-widget-badge">Base: {city_prof['engagement']} %</span>
-            </div>
-        """, unsafe_allow_html=True)
-        in_4 = st.slider("Engagement Rate (%)", 0.5, 20.0, float(v4_def), step=0.1, label_visibility="collapsed", key=f"sm_eng_{selected_city}_{sim_preset}")
-        st.markdown(f"""
-            <div class="param-widget-footer">
-                <span>0.5 %</span>
-                <span style="font-weight:700; color:#0284c7;">Val: {in_4:.1f} %</span>
-                <span>20.0 %</span>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
+        in_4 = st.slider("Engagement Rate (%)", 0.5, 15.0, float(city_prof["engagement"]), step=0.1, key=f"sm_eng_{selected_city}")
 
 elif selected_theme == "🌱 Environment":
-    v1_def = min(500, max(10, int(city_prof["aqi"] * mult)))
-    v2_def = min(400, max(5, int(city_prof["pm25"] * mult)))
-    v3_def = min(600, max(10, int(city_prof["pm10"] * mult)))
-    v4_def = min(50, max(10, int(city_prof["temp"] * (mult if mult > 1 else 1.0))))
-
+    t_key = "environment"
     with col1:
-        st.markdown(f"""
-        <div class="param-widget-card">
-            <div class="param-widget-header">
-                <span class="param-widget-title">🌫️ AQI Index</span>
-                <span class="param-widget-badge">Base: {city_prof['aqi']}</span>
-            </div>
-        """, unsafe_allow_html=True)
-        in_1 = st.slider("AQI Index", 10, 500, v1_def, step=5, label_visibility="collapsed", key=f"e_aqi_{selected_city}_{sim_preset}")
-        st.markdown(f"""
-            <div class="param-widget-footer">
-                <span>10 AQI</span>
-                <span style="font-weight:700; color:#0284c7;">Val: {in_1}</span>
-                <span>500 AQI</span>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-
+        in_1 = st.slider("AQI Index (CPCB)", 10, 500, int(city_prof["aqi"]), key=f"e_aqi_{selected_city}")
     with col2:
-        st.markdown(f"""
-        <div class="param-widget-card">
-            <div class="param-widget-header">
-                <span class="param-widget-title">💨 PM2.5 Concentration</span>
-                <span class="param-widget-badge">Base: {city_prof['pm25']} µg/m³</span>
-            </div>
-        """, unsafe_allow_html=True)
-        in_2 = st.slider("PM2.5 (µg/m³)", 5, 400, v2_def, step=5, label_visibility="collapsed", key=f"e_pm25_{selected_city}_{sim_preset}")
-        st.markdown(f"""
-            <div class="param-widget-footer">
-                <span>5 µg/m³</span>
-                <span style="font-weight:700; color:#0284c7;">Val: {in_2} µg/m³</span>
-                <span>400 µg/m³</span>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-
+        in_2 = st.slider("PM2.5 (µg/m³)", 5, 350, int(city_prof["pm25"]), key=f"e_pm25_{selected_city}")
     with col3:
-        st.markdown(f"""
-        <div class="param-widget-card">
-            <div class="param-widget-header">
-                <span class="param-widget-title">🌪️ PM10 Concentration</span>
-                <span class="param-widget-badge">Base: {city_prof['pm10']} µg/m³</span>
-            </div>
-        """, unsafe_allow_html=True)
-        in_3 = st.slider("PM10 (µg/m³)", 10, 600, v3_def, step=5, label_visibility="collapsed", key=f"e_pm10_{selected_city}_{sim_preset}")
-        st.markdown(f"""
-            <div class="param-widget-footer">
-                <span>10 µg/m³</span>
-                <span style="font-weight:700; color:#0284c7;">Val: {in_3} µg/m³</span>
-                <span>600 µg/m³</span>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-
+        in_3 = st.slider("PM10 (µg/m³)", 10, 500, int(city_prof["pm10"]), key=f"e_pm10_{selected_city}")
     with col4:
-        st.markdown(f"""
-        <div class="param-widget-card">
-            <div class="param-widget-header">
-                <span class="param-widget-title">🌡️ Ambient Temperature</span>
-                <span class="param-widget-badge">Base: {city_prof['temp']} °C</span>
-            </div>
-        """, unsafe_allow_html=True)
-        in_4 = st.slider("Temperature (°C)", 10, 50, v4_def, step=1, label_visibility="collapsed", key=f"e_tmp_{selected_city}_{sim_preset}")
-        st.markdown(f"""
-            <div class="param-widget-footer">
-                <span>10 °C</span>
-                <span style="font-weight:700; color:#0284c7;">Val: {in_4} °C</span>
-                <span>50 °C</span>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
+        in_4 = st.slider("Temperature (°C)", 10, 50, int(city_prof["temp"]), key=f"e_tmp_{selected_city}")
 
 # Analyze Button
-_, btn_center, _ = st.columns([1.2, 1.6, 1.2])
+_, btn_center, _ = st.columns([1, 2, 1])
 with btn_center:
-    st.button("🔮 RUN AI INFERENCE & DISPATCH", use_container_width=True)
+    st.button("🔮 ANALYZE", use_container_width=True)
 
 # ============================================================
 # DYNAMIC ML INFERENCE CALCULATION FOR SELECTED CITY & INPUTS
