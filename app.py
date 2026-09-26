@@ -9,8 +9,8 @@ from datetime import datetime
 # PAGE CONFIGURATION
 # ============================================================
 st.set_page_config(
-    page_title="CityInsight AI | Urban Intelligence Platform",
-    page_icon="🏙️",
+    page_title="CivicGuard | AI Urban Intelligence Platform",
+    page_icon="🛡️",
     layout="wide",
     initial_sidebar_state="collapsed"
 )
@@ -400,10 +400,10 @@ hdr_c1, hdr_c2, hdr_c3 = st.columns([3.2, 1.4, 1.4])
 with hdr_c1:
     st.markdown("""
     <div class="brand-wrap">
-        <div style="font-size:28px;">🏙️</div>
+        <div style="font-size:32px;">🛡️</div>
         <div>
-            <div class="brand-title">CityInsight <span>AI</span></div>
-            <div class="brand-sub">Smarter Decisions Through Data • College Hackathon Edition</div>
+            <div class="brand-title">Civic<span>guard</span></div>
+            <div class="brand-sub">AI-Powered Multi-Domain Urban Intelligence • College Hackathon Edition</div>
         </div>
     </div>
     """, unsafe_allow_html=True)
