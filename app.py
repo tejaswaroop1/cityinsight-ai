@@ -118,31 +118,30 @@ def get_city_profile(city_name):
 
     h = sum(ord(c) for c in str(city_name))
     
-    # Realistic Normal/Calm Baselines for Indian Cities (Sunny/Optimal defaults)
-    base_rainfall = 5 + (h % 25)              # 5 to 29 mm (dry/normal sunny weather)
-    base_water_level = round(1.5 + (h % 15) / 10.0, 1)  # 1.5 to 2.9 m (safe river/reservoir baseline)
-    base_temp = 30 + (h % 9)                  # 30 to 38 °C (realistic sunny Indian city temp)
-    base_humidity = 42 + (h % 22)             # 42 to 63 % (moderate humidity)
+    base_rainfall = 120 + (h % 280)
+    base_water_level = round(3.5 + (h % 90) / 10.0, 1)
+    base_temp = 24 + (h % 16)
+    base_humidity = 45 + (h % 50)
     
-    base_traffic = 2200 + (h % 2500)          # 2200 to 4600 v/h (normal smooth flow)
-    base_speed = 42 + (h % 18)                # 42 to 59 km/h (optimal transit speed)
-    base_sensors = 500 + (h % 400)            # 500 to 899 active nodes
-    base_energy = 380 + (h % 300)             # 380 to 679 MWh
+    base_traffic = 3500 + (h % 8000)
+    base_speed = 22 + (h % 35)
+    base_sensors = 250 + (h % 950)
+    base_energy = 450 + (h % 700)
     
-    base_rev = 3500 + (h % 3000)              # ₹3500 to ₹6499 Lakhs
-    base_exp = int(base_rev * (0.60 + (h % 15) / 100.0))  # Healthy fiscal surplus margin
-    base_inv = int(base_rev * 0.20)
-    base_mkt = int(base_rev * 2.2)
+    base_rev = 1200 + (h % 4500)
+    base_exp = int(base_rev * (0.65 + (h % 30) / 100.0))
+    base_inv = int(base_rev * 0.25)
+    base_mkt = int(base_rev * 1.8)
     
-    base_cyber_traffic = 350 + (h % 450)      # 350 to 799 MB/s
-    base_logins = 5 + (h % 18)                # 5 to 22 failed attempts/hr (safe)
-    base_threats = 1 + (h % 3)                # 1 to 3 threats (safe baseline)
-    base_packets = 60 + (h % 80)              # 60 to 139 k/s
+    base_cyber_traffic = 350 + (h % 1600)
+    base_logins = 20 + (h % 220)
+    base_threats = 5 + (h % 45)
+    base_packets = 80 + (h % 380)
     
-    base_followers = 65000 + (h % 250000)
-    base_likes = 2500 + (h % 6000)
-    base_comments = 280 + (h % 900)
-    base_eng = round(4.2 + (h % 35) / 10.0, 1)
+    base_followers = 45000 + (h % 450000)
+    base_likes = 1200 + (h % 15000)
+    base_comments = 150 + (h % 1800)
+    base_eng = round(2.5 + (h % 65) / 10.0, 1)
     
     pm25_default = int(pollutants.get("PM2.5") or (city_aqi * 0.65))
     pm10_default = int(pollutants.get("PM10") or (city_aqi * 1.15))
@@ -358,6 +357,52 @@ st.markdown("""
         text-align: left;
     }
     
+    /* Precision Telemetry Parameter Card (Modern Executive UI) */
+    .telemetry-card {
+        background: #ffffff;
+        border: 1.5px solid #e2e8f0;
+        border-radius: 12px;
+        padding: 14px 16px 12px 16px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        margin-bottom: 8px;
+        transition: all 0.2s ease-in-out;
+    }
+    .telemetry-card:hover {
+        border-color: #0284c7;
+        box-shadow: 0 4px 14px rgba(2, 132, 199, 0.10);
+    }
+    .telemetry-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 8px;
+    }
+    .telemetry-title {
+        font-size: 12.5px;
+        font-weight: 700;
+        color: #0f172a;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+    .telemetry-badge {
+        font-size: 10.5px;
+        font-weight: 700;
+        color: #0369a1;
+        background: #e0f2fe;
+        border: 1px solid #bae6fd;
+        padding: 2px 8px;
+        border-radius: 6px;
+    }
+    .telemetry-footer {
+        font-size: 10.5px;
+        color: #64748b;
+        margin-top: 6px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
     /* Clean Light Streamlit Controls */
     div[data-baseweb="select"] > div {
         background-color: #ffffff !important;
@@ -365,28 +410,49 @@ st.markdown("""
         color: #0f172a !important;
         border-radius: 8px !important;
     }
-    .stSlider > div {
-        color: #0284c7 !important;
+    
+    /* Precision Stepper Number Input */
+    div[data-testid="stNumberInput"] {
+        margin-top: 2px;
+        margin-bottom: 2px;
     }
+    div[data-testid="stNumberInput"] input {
+        background: #f8fafc !important;
+        border: 1.5px solid #cbd5e1 !important;
+        color: #0f172a !important;
+        font-size: 15px !important;
+        font-weight: 800 !important;
+        border-radius: 8px !important;
+        padding: 8px 12px !important;
+        text-align: center !important;
+    }
+    div[data-testid="stNumberInput"] input:focus {
+        border-color: #0284c7 !important;
+        box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15) !important;
+    }
+    div[data-testid="stNumberInput"] button {
+        background: #f1f5f9 !important;
+        color: #0f172a !important;
+        border: 1px solid #cbd5e1 !important;
+        border-radius: 6px !important;
+    }
+    div[data-testid="stNumberInput"] button:hover {
+        background: #0284c7 !important;
+        color: #ffffff !important;
+    }
+    
     .stButton > button {
         background: linear-gradient(90deg, #0284c7 0%, #0369a1 100%) !important;
         color: #ffffff !important;
         font-weight: 700 !important;
         border: none !important;
         border-radius: 8px !important;
-        padding: 10px 24px !important;
+        padding: 12px 24px !important;
         box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25) !important;
         width: 100% !important;
     }
     .stButton > button:hover {
         background: linear-gradient(90deg, #0369a1 0%, #075985 100%) !important;
-    }
-    
-    div[data-testid="stNumberInput"] input {
-        background: #ffffff !important;
-        border: 1px solid #cbd5e1 !important;
-        color: #0f172a !important;
-        border-radius: 8px !important;
     }
 
     /* Headings */
@@ -517,89 +583,521 @@ with hdr_c3:
 city_prof = get_city_profile(selected_city)
 
 # ============================================================
-# MAIN USER INPUT CARD: "🎯 Analyze Your Data"
+# MAIN USER INPUT CARD: "🎯 Executive Telemetry Console"
 # ============================================================
-st.markdown(f"""
-<div class="glass-card" style="margin-top: 6px;">
-    <div style="font-size:14px; font-weight:700; color:#0f172a; margin-bottom:4px;">
-        🎯 Analyze Your Data — <span style="color:#0284c7;">{selected_city}</span> <span style="font-size:11.5px; color:#64748b; font-weight:500;">({city_prof['state']})</span>
-    </div>
-</div>
-""", unsafe_allow_html=True)
+theme_map = {
+    "🚨 Disaster Management": "disaster",
+    "🏙️ Smart City": "smart_city",
+    "💰 Finance & Business": "finance",
+    "🛡️ Cyber & Network": "cyber",
+    "📱 Social Media": "social",
+    "🌱 Environment": "environment"
+}
+t_key = theme_map.get(selected_theme, "disaster")
 
-# Dynamic Inputs According to Selected Theme
+# Simulator Header Bar with Quick Scenario Presets
+sim_top_c1, sim_top_c2 = st.columns([3, 1.6])
+with sim_top_c1:
+    st.markdown(f"""
+    <div style="padding: 4px 0 2px 0;">
+        <div style="font-size:14.5px; font-weight:800; color:#0f172a; display:flex; align-items:center; gap:8px;">
+            <span>🎛️ Live Parameter Console</span>
+            <span style="font-size:11px; font-weight:700; color:#0284c7; background:#e0f2fe; padding:2px 8px; border-radius:6px; border:1px solid #bae6fd;">📍 {selected_city} ({city_prof['state']})</span>
+        </div>
+        <div style="font-size:11px; color:#64748b; margin-top:2px;">Digital telemetry steppers with automated live city baseline synchronization.</div>
+    </div>
+    """, unsafe_allow_html=True)
+
+with sim_top_c2:
+    sim_preset = st.selectbox(
+        "Simulation Preset",
+        ["📍 Normal Baseline", "⚡ Stress Spike (+35%)", "⚠️ Crisis / Surge (+70%)", "🌱 Low Load (-25%)"],
+        index=0,
+        label_visibility="collapsed",
+        key=f"sim_preset_{selected_city}_{t_key}"
+    )
+
+mult = 1.35 if "Stress" in sim_preset else 1.70 if "Crisis" in sim_preset else 0.75 if "Low Load" in sim_preset else 1.0
+
+# 4 Precision Digital Telemetry Cards
 col1, col2, col3, col4 = st.columns(4)
 
 if selected_theme == "🚨 Disaster Management":
-    t_key = "disaster"
+    v1_def = min(500, max(0, int(city_prof["rainfall"] * mult)))
+    v2_def = min(50, max(10, int(city_prof["temp"] * (mult if mult > 1 else 1.0))))
+    v3_def = min(100, max(10, int(city_prof["humidity"] * mult)))
+    v4_def = min(15.0, max(0.0, round(float(city_prof["water_level"] * mult), 1)))
+
     with col1:
-        in_1 = st.slider("Rainfall Inflow (mm)", 0, 500, int(city_prof["rainfall"]), key=f"dm_rf_{selected_city}")
+        st.markdown(f"""
+        <div class="telemetry-card">
+            <div class="telemetry-header">
+                <span class="telemetry-title">🌧️ Rainfall Inflow</span>
+                <span class="telemetry-badge">Base: {city_prof['rainfall']} mm</span>
+            </div>
+        """, unsafe_allow_html=True)
+        in_1 = st.number_input("Rainfall (mm)", min_value=0, max_value=500, value=v1_def, step=10, label_visibility="collapsed", key=f"dm_rf_{selected_city}_{sim_preset}")
+        st.markdown(f"""
+            <div class="telemetry-footer">
+                <span>Safe: &lt;100 mm</span>
+                <span style="font-weight:700; color:{'#ef4444' if in_1 > 200 else '#f59e0b' if in_1 > 100 else '#10b981'};">
+                    {'🔴 High Surge' if in_1 > 200 else '🟡 Moderate' if in_1 > 100 else '🟢 Safe'}
+                </span>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
     with col2:
-        in_2 = st.slider("Temperature (°C)", 10, 50, int(city_prof["temp"]), key=f"dm_tmp_{selected_city}")
+        st.markdown(f"""
+        <div class="telemetry-card">
+            <div class="telemetry-header">
+                <span class="telemetry-title">🌡️ Temperature</span>
+                <span class="telemetry-badge">Base: {city_prof['temp']} °C</span>
+            </div>
+        """, unsafe_allow_html=True)
+        in_2 = st.number_input("Temperature (°C)", min_value=10, max_value=55, value=v2_def, step=1, label_visibility="collapsed", key=f"dm_tmp_{selected_city}_{sim_preset}")
+        st.markdown(f"""
+            <div class="telemetry-footer">
+                <span>Norm: 20–40 °C</span>
+                <span style="font-weight:700; color:{'#ef4444' if in_2 > 42 else '#f59e0b' if in_2 > 38 else '#10b981'};">
+                    {'🔴 Heat Stress' if in_2 > 42 else '🟡 Warm' if in_2 > 38 else '🟢 Optimal'}
+                </span>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
     with col3:
-        in_3 = st.slider("Humidity (%)", 10, 100, int(city_prof["humidity"]), key=f"dm_hum_{selected_city}")
+        st.markdown(f"""
+        <div class="telemetry-card">
+            <div class="telemetry-header">
+                <span class="telemetry-title">💧 Humidity</span>
+                <span class="telemetry-badge">Base: {city_prof['humidity']} %</span>
+            </div>
+        """, unsafe_allow_html=True)
+        in_3 = st.number_input("Humidity (%)", min_value=10, max_value=100, value=v3_def, step=5, label_visibility="collapsed", key=f"dm_hum_{selected_city}_{sim_preset}")
+        st.markdown(f"""
+            <div class="telemetry-footer">
+                <span>Range: 10–100%</span>
+                <span style="font-weight:700; color:{'#ef4444' if in_3 > 85 else '#f59e0b' if in_3 > 70 else '#10b981'};">
+                    {'🔴 Heavy Moisture' if in_3 > 85 else '🟡 Elevated' if in_3 > 70 else '🟢 Normal'}
+                </span>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
     with col4:
-        in_4 = st.slider("Water Level / Surge (m)", 0.0, 15.0, float(city_prof["water_level"]), step=0.1, key=f"dm_wl_{selected_city}")
+        st.markdown(f"""
+        <div class="telemetry-card">
+            <div class="telemetry-header">
+                <span class="telemetry-title">🌊 Water Level / Surge</span>
+                <span class="telemetry-badge">Base: {city_prof['water_level']} m</span>
+            </div>
+        """, unsafe_allow_html=True)
+        in_4 = st.number_input("Water Level (m)", min_value=0.0, max_value=15.0, value=float(v4_def), step=0.1, format="%.1f", label_visibility="collapsed", key=f"dm_wl_{selected_city}_{sim_preset}")
+        st.markdown(f"""
+            <div class="telemetry-footer">
+                <span>Danger: &gt;6.0 m</span>
+                <span style="font-weight:700; color:{'#ef4444' if in_4 > 6.0 else '#f59e0b' if in_4 > 3.5 else '#10b981'};">
+                    {'🔴 River Overflow' if in_4 > 6.0 else '🟡 Warning' if in_4 > 3.5 else '🟢 Safe Basin'}
+                </span>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
 
 elif selected_theme == "🏙️ Smart City":
-    t_key = "smart_city"
+    v1_def = min(15000, max(500, int(city_prof["traffic"] * mult)))
+    v2_def = min(90, max(5, int(city_prof["speed"] / (mult if mult > 1 else 0.85))))
+    v3_def = min(2000, max(50, int(city_prof["sensors"] * mult)))
+    v4_def = min(2000, max(50, int(city_prof["energy"] * mult)))
+
     with col1:
-        in_1 = st.slider("Traffic Volume (Vehicles/hr)", 500, 15000, int(city_prof["traffic"]), step=100, key=f"sc_tr_{selected_city}")
+        st.markdown(f"""
+        <div class="telemetry-card">
+            <div class="telemetry-header">
+                <span class="telemetry-title">🚗 Traffic Volume</span>
+                <span class="telemetry-badge">Base: {city_prof['traffic']} v/h</span>
+            </div>
+        """, unsafe_allow_html=True)
+        in_1 = st.number_input("Traffic (v/h)", min_value=500, max_value=15000, value=v1_def, step=100, label_visibility="collapsed", key=f"sc_tr_{selected_city}_{sim_preset}")
+        st.markdown(f"""
+            <div class="telemetry-footer">
+                <span>Throughput</span>
+                <span style="font-weight:700; color:{'#ef4444' if in_1 > 7000 else '#f59e0b' if in_1 > 4000 else '#10b981'};">
+                    {'🔴 Congestion' if in_1 > 7000 else '🟡 Moderate' if in_1 > 4000 else '🟢 Fluid Flow'}
+                </span>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
     with col2:
-        in_2 = st.slider("Average Speed (km/h)", 5, 90, int(city_prof["speed"]), key=f"sc_sp_{selected_city}")
+        st.markdown(f"""
+        <div class="telemetry-card">
+            <div class="telemetry-header">
+                <span class="telemetry-title">⚡ Transit Speed</span>
+                <span class="telemetry-badge">Base: {city_prof['speed']} km/h</span>
+            </div>
+        """, unsafe_allow_html=True)
+        in_2 = st.number_input("Speed (km/h)", min_value=5, max_value=90, value=v2_def, step=5, label_visibility="collapsed", key=f"sc_sp_{selected_city}_{sim_preset}")
+        st.markdown(f"""
+            <div class="telemetry-footer">
+                <span>Avg Corridor</span>
+                <span style="font-weight:700; color:{'#ef4444' if in_2 < 18 else '#f59e0b' if in_2 < 30 else '#10b981'};">
+                    {'🔴 Bottleneck' if in_2 < 18 else '🟡 Slow' if in_2 < 30 else '🟢 Free Flow'}
+                </span>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
     with col3:
-        in_3 = st.number_input("IoT Grid Sensors (Nodes)", value=int(city_prof["sensors"]), step=50, key=f"sc_sen_{selected_city}")
+        st.markdown(f"""
+        <div class="telemetry-card">
+            <div class="telemetry-header">
+                <span class="telemetry-title">📡 IoT Grid Nodes</span>
+                <span class="telemetry-badge">Base: {city_prof['sensors']} Nodes</span>
+            </div>
+        """, unsafe_allow_html=True)
+        in_3 = st.number_input("Sensors (Nodes)", min_value=50, max_value=2000, value=v3_def, step=50, label_visibility="collapsed", key=f"sc_sen_{selected_city}_{sim_preset}")
+        st.markdown(f"""
+            <div class="telemetry-footer">
+                <span>Urban Grid</span>
+                <span style="font-weight:700; color:#10b981;">🟢 Live Sync</span>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
     with col4:
-        in_4 = st.slider("Grid Energy Usage (MWh)", 50, 2000, int(city_prof["energy"]), key=f"sc_eng_{selected_city}")
+        st.markdown(f"""
+        <div class="telemetry-card">
+            <div class="telemetry-header">
+                <span class="telemetry-title">💡 Grid Energy Usage</span>
+                <span class="telemetry-badge">Base: {city_prof['energy']} MWh</span>
+            </div>
+        """, unsafe_allow_html=True)
+        in_4 = st.number_input("Energy (MWh)", min_value=50, max_value=2000, value=v4_def, step=25, label_visibility="collapsed", key=f"sc_eng_{selected_city}_{sim_preset}")
+        st.markdown(f"""
+            <div class="telemetry-footer">
+                <span>Power Draw</span>
+                <span style="font-weight:700; color:{'#ef4444' if in_4 > 1200 else '#f59e0b' if in_4 > 700 else '#10b981'};">
+                    {'🔴 Peak Load' if in_4 > 1200 else '🟡 Elevated' if in_4 > 700 else '🟢 Stable'}
+                </span>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
 
 elif selected_theme == "💰 Finance & Business":
-    t_key = "finance"
+    v1_def = int(city_prof["revenue"] * mult)
+    v2_def = int(city_prof["expenses"] * mult)
+    v3_def = int(city_prof["investment"] * mult)
+    v4_def = int(city_prof["market_val"] * mult)
+
     with col1:
-        in_1 = st.number_input("Revenue (₹ Lakhs)", value=int(city_prof["revenue"]), step=100, key=f"f_rev_{selected_city}")
+        st.markdown(f"""
+        <div class="telemetry-card">
+            <div class="telemetry-header">
+                <span class="telemetry-title">📈 Municipal Revenue</span>
+                <span class="telemetry-badge">Base: ₹{city_prof['revenue']}L</span>
+            </div>
+        """, unsafe_allow_html=True)
+        in_1 = st.number_input("Revenue (₹ Lakhs)", min_value=100, max_value=30000, value=v1_def, step=100, label_visibility="collapsed", key=f"f_rev_{selected_city}_{sim_preset}")
+        st.markdown(f"""
+            <div class="telemetry-footer">
+                <span>Treasury Inflow</span>
+                <span style="font-weight:700; color:#10b981;">🟢 Verified Inflow</span>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
     with col2:
-        in_2 = st.number_input("Expenses (₹ Lakhs)", value=int(city_prof["expenses"]), step=100, key=f"f_exp_{selected_city}")
+        st.markdown(f"""
+        <div class="telemetry-card">
+            <div class="telemetry-header">
+                <span class="telemetry-title">📉 Operational Expenses</span>
+                <span class="telemetry-badge">Base: ₹{city_prof['expenses']}L</span>
+            </div>
+        """, unsafe_allow_html=True)
+        in_2 = st.number_input("Expenses (₹ Lakhs)", min_value=50, max_value=20000, value=v2_def, step=100, label_visibility="collapsed", key=f"f_exp_{selected_city}_{sim_preset}")
+        st.markdown(f"""
+            <div class="telemetry-footer">
+                <span>Burn Rate</span>
+                <span style="font-weight:700; color:{'#ef4444' if in_2 > in_1 else '#10b981'};">
+                    {'🔴 Deficit' if in_2 > in_1 else '🟢 Balanced'}
+                </span>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
     with col3:
-        in_3 = st.number_input("Investment (₹ Lakhs)", value=int(city_prof["investment"]), step=50, key=f"f_inv_{selected_city}")
+        st.markdown(f"""
+        <div class="telemetry-card">
+            <div class="telemetry-header">
+                <span class="telemetry-title">🏗️ Infrastructure CapEx</span>
+                <span class="telemetry-badge">Base: ₹{city_prof['investment']}L</span>
+            </div>
+        """, unsafe_allow_html=True)
+        in_3 = st.number_input("Investment (₹ Lakhs)", min_value=10, max_value=10000, value=v3_def, step=50, label_visibility="collapsed", key=f"f_inv_{selected_city}_{sim_preset}")
+        st.markdown(f"""
+            <div class="telemetry-footer">
+                <span>Growth Projects</span>
+                <span style="font-weight:700; color:#0284c7;">Allocated</span>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
     with col4:
-        in_4 = st.number_input("Market Value (₹ Lakhs)", value=int(city_prof["market_val"]), step=200, key=f"f_mkt_{selected_city}")
+        st.markdown(f"""
+        <div class="telemetry-card">
+            <div class="telemetry-header">
+                <span class="telemetry-title">🏛️ Civic Asset Base</span>
+                <span class="telemetry-badge">Base: ₹{city_prof['market_val']}L</span>
+            </div>
+        """, unsafe_allow_html=True)
+        in_4 = st.number_input("Market Value (₹ Lakhs)", min_value=200, max_value=60000, value=v4_def, step=200, label_visibility="collapsed", key=f"f_mkt_{selected_city}_{sim_preset}")
+        st.markdown(f"""
+            <div class="telemetry-footer">
+                <span>Asset Valuation</span>
+                <span style="font-weight:700; color:#10b981;">🟢 AAA Rating</span>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
 
 elif selected_theme == "🛡️ Cyber & Network":
-    t_key = "cyber"
+    v1_def = min(3000, max(50, int(city_prof["cyber_traffic"] * mult)))
+    v2_def = min(500, max(0, int(city_prof["logins"] * mult)))
+    v3_def = min(100, max(0, int(city_prof["threats"] * mult)))
+    v4_def = min(800, max(10, int(city_prof["packets"] * mult)))
+
     with col1:
-        in_1 = st.slider("Network Traffic (MB/s)", 50, 2500, int(city_prof["cyber_traffic"]), key=f"cb_tr_{selected_city}")
+        st.markdown(f"""
+        <div class="telemetry-card">
+            <div class="telemetry-header">
+                <span class="telemetry-title">🌐 Network Traffic</span>
+                <span class="telemetry-badge">Base: {city_prof['cyber_traffic']} MB/s</span>
+            </div>
+        """, unsafe_allow_html=True)
+        in_1 = st.number_input("Traffic (MB/s)", min_value=50, max_value=3000, value=v1_def, step=25, label_visibility="collapsed", key=f"cb_tr_{selected_city}_{sim_preset}")
+        st.markdown(f"""
+            <div class="telemetry-footer">
+                <span>Bandwidth</span>
+                <span style="font-weight:700; color:#10b981;">🟢 Nominal</span>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
     with col2:
-        in_2 = st.slider("Failed Logins (/hr)", 0, 500, int(city_prof["logins"]), key=f"cb_log_{selected_city}")
+        st.markdown(f"""
+        <div class="telemetry-card">
+            <div class="telemetry-header">
+                <span class="telemetry-title">⚠️ Failed Auth Logins</span>
+                <span class="telemetry-badge">Base: {city_prof['logins']}/hr</span>
+            </div>
+        """, unsafe_allow_html=True)
+        in_2 = st.number_input("Failed Logins (/hr)", min_value=0, max_value=500, value=v2_def, step=5, label_visibility="collapsed", key=f"cb_log_{selected_city}_{sim_preset}")
+        st.markdown(f"""
+            <div class="telemetry-footer">
+                <span>Auth Perimeter</span>
+                <span style="font-weight:700; color:{'#ef4444' if in_2 > 100 else '#f59e0b' if in_2 > 30 else '#10b981'};">
+                    {'🔴 Brute Force' if in_2 > 100 else '🟡 Elevated' if in_2 > 30 else '🟢 Secure'}
+                </span>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
     with col3:
-        in_3 = st.slider("Threat Count", 0, 100, int(city_prof["threats"]), key=f"cb_thr_{selected_city}")
+        st.markdown(f"""
+        <div class="telemetry-card">
+            <div class="telemetry-header">
+                <span class="telemetry-title">🚨 Threat Count</span>
+                <span class="telemetry-badge">Base: {city_prof['threats']} Threats</span>
+            </div>
+        """, unsafe_allow_html=True)
+        in_3 = st.number_input("Threat Count", min_value=0, max_value=100, value=v3_def, step=1, label_visibility="collapsed", key=f"cb_thr_{selected_city}_{sim_preset}")
+        st.markdown(f"""
+            <div class="telemetry-footer">
+                <span>IDS / IPS</span>
+                <span style="font-weight:700; color:{'#ef4444' if in_3 > 20 else '#f59e0b' if in_3 > 8 else '#10b981'};">
+                    {'🔴 Critical Vector' if in_3 > 20 else '🟡 Monitored' if in_3 > 8 else '🟢 Safe'}
+                </span>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
     with col4:
-        in_4 = st.slider("Packet Activity (k/s)", 10, 600, int(city_prof["packets"]), key=f"cb_pkt_{selected_city}")
+        st.markdown(f"""
+        <div class="telemetry-card">
+            <div class="telemetry-header">
+                <span class="telemetry-title">📦 Packet Flow Rate</span>
+                <span class="telemetry-badge">Base: {city_prof['packets']} k/s</span>
+            </div>
+        """, unsafe_allow_html=True)
+        in_4 = st.number_input("Packet Activity (k/s)", min_value=10, max_value=800, value=v4_def, step=10, label_visibility="collapsed", key=f"cb_pkt_{selected_city}_{sim_preset}")
+        st.markdown(f"""
+            <div class="telemetry-footer">
+                <span>Throughput</span>
+                <span style="font-weight:700; color:#10b981;">🟢 Standard Flow</span>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
 
 elif selected_theme == "📱 Social Media":
-    t_key = "social"
+    v1_def = int(city_prof["followers"] * mult)
+    v2_def = int(city_prof["likes"] * mult)
+    v3_def = int(city_prof["comments"] * mult)
+    v4_def = min(20.0, max(0.5, round(float(city_prof["engagement"] * mult), 1)))
+
     with col1:
-        in_1 = st.number_input("Followers Count", value=int(city_prof["followers"]), step=5000, key=f"sm_fol_{selected_city}")
+        st.markdown(f"""
+        <div class="telemetry-card">
+            <div class="telemetry-header">
+                <span class="telemetry-title">👥 Citizen Reach</span>
+                <span class="telemetry-badge">Base: {city_prof['followers']:,}</span>
+            </div>
+        """, unsafe_allow_html=True)
+        in_1 = st.number_input("Followers Count", min_value=1000, max_value=2000000, value=v1_def, step=5000, label_visibility="collapsed", key=f"sm_fol_{selected_city}_{sim_preset}")
+        st.markdown(f"""
+            <div class="telemetry-footer">
+                <span>Audience</span>
+                <span style="font-weight:700; color:#0284c7;">Active Reach</span>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
     with col2:
-        in_2 = st.number_input("Daily Likes", value=int(city_prof["likes"]), step=200, key=f"sm_lik_{selected_city}")
+        st.markdown(f"""
+        <div class="telemetry-card">
+            <div class="telemetry-header">
+                <span class="telemetry-title">❤️ Daily Likes</span>
+                <span class="telemetry-badge">Base: {city_prof['likes']:,}/day</span>
+            </div>
+        """, unsafe_allow_html=True)
+        in_2 = st.number_input("Daily Likes", min_value=50, max_value=100000, value=v2_def, step=200, label_visibility="collapsed", key=f"sm_lik_{selected_city}_{sim_preset}")
+        st.markdown(f"""
+            <div class="telemetry-footer">
+                <span>Sentiment</span>
+                <span style="font-weight:700; color:#10b981;">🟢 Positive</span>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
     with col3:
-        in_3 = st.number_input("Comments / Day", value=int(city_prof["comments"]), step=50, key=f"sm_com_{selected_city}")
+        st.markdown(f"""
+        <div class="telemetry-card">
+            <div class="telemetry-header">
+                <span class="telemetry-title">💬 Comments / Day</span>
+                <span class="telemetry-badge">Base: {city_prof['comments']:,}/day</span>
+            </div>
+        """, unsafe_allow_html=True)
+        in_3 = st.number_input("Comments / Day", min_value=10, max_value=20000, value=v3_def, step=50, label_visibility="collapsed", key=f"sm_com_{selected_city}_{sim_preset}")
+        st.markdown(f"""
+            <div class="telemetry-footer">
+                <span>Discussions</span>
+                <span style="font-weight:700; color:#0284c7;">Civic Forum</span>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
     with col4:
-        in_4 = st.slider("Engagement Rate (%)", 0.5, 15.0, float(city_prof["engagement"]), step=0.1, key=f"sm_eng_{selected_city}")
+        st.markdown(f"""
+        <div class="telemetry-card">
+            <div class="telemetry-header">
+                <span class="telemetry-title">📊 Engagement Rate (%)</span>
+                <span class="telemetry-badge">Base: {city_prof['engagement']} %</span>
+            </div>
+        """, unsafe_allow_html=True)
+        in_4 = st.number_input("Engagement Rate (%)", min_value=0.5, max_value=20.0, value=float(v4_def), step=0.1, format="%.1f", label_visibility="collapsed", key=f"sm_eng_{selected_city}_{sim_preset}")
+        st.markdown(f"""
+            <div class="telemetry-footer">
+                <span>Rate</span>
+                <span style="font-weight:700; color:#10b981;">🟢 Strong Outreach</span>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
 
 elif selected_theme == "🌱 Environment":
-    t_key = "environment"
+    v1_def = min(500, max(10, int(city_prof["aqi"] * mult)))
+    v2_def = min(400, max(5, int(city_prof["pm25"] * mult)))
+    v3_def = min(600, max(10, int(city_prof["pm10"] * mult)))
+    v4_def = min(50, max(10, int(city_prof["temp"] * (mult if mult > 1 else 1.0))))
+
     with col1:
-        in_1 = st.slider("AQI Index (CPCB)", 10, 500, int(city_prof["aqi"]), key=f"e_aqi_{selected_city}")
+        st.markdown(f"""
+        <div class="telemetry-card">
+            <div class="telemetry-header">
+                <span class="telemetry-title">🌫️ AQI Index</span>
+                <span class="telemetry-badge">Base: {city_prof['aqi']}</span>
+            </div>
+        """, unsafe_allow_html=True)
+        in_1 = st.number_input("AQI Index", min_value=10, max_value=500, value=v1_def, step=5, label_visibility="collapsed", key=f"e_aqi_{selected_city}_{sim_preset}")
+        st.markdown(f"""
+            <div class="telemetry-footer">
+                <span>CPCB Scale</span>
+                <span style="font-weight:700; color:{'#ef4444' if in_1 > 200 else '#f59e0b' if in_1 > 100 else '#10b981'};">
+                    {'🔴 Severe / Poor' if in_1 > 200 else '🟡 Moderate' if in_1 > 100 else '🟢 Satisfactory'}
+                </span>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
     with col2:
-        in_2 = st.slider("PM2.5 (µg/m³)", 5, 350, int(city_prof["pm25"]), key=f"e_pm25_{selected_city}")
+        st.markdown(f"""
+        <div class="telemetry-card">
+            <div class="telemetry-header">
+                <span class="telemetry-title">💨 PM2.5 Fine Dust</span>
+                <span class="telemetry-badge">Base: {city_prof['pm25']} µg/m³</span>
+            </div>
+        """, unsafe_allow_html=True)
+        in_2 = st.number_input("PM2.5 (µg/m³)", min_value=5, max_value=400, value=v2_def, step=5, label_visibility="collapsed", key=f"e_pm25_{selected_city}_{sim_preset}")
+        st.markdown(f"""
+            <div class="telemetry-footer">
+                <span>Std: &lt;60 µg/m³</span>
+                <span style="font-weight:700; color:{'#ef4444' if in_2 > 120 else '#f59e0b' if in_2 > 60 else '#10b981'};">
+                    {'🔴 High' if in_2 > 120 else '🟡 Elevated' if in_2 > 60 else '🟢 Normal'}
+                </span>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
     with col3:
-        in_3 = st.slider("PM10 (µg/m³)", 10, 500, int(city_prof["pm10"]), key=f"e_pm10_{selected_city}")
+        st.markdown(f"""
+        <div class="telemetry-card">
+            <div class="telemetry-header">
+                <span class="telemetry-title">🌪️ PM10 Particulate</span>
+                <span class="telemetry-badge">Base: {city_prof['pm10']} µg/m³</span>
+            </div>
+        """, unsafe_allow_html=True)
+        in_3 = st.number_input("PM10 (µg/m³)", min_value=10, max_value=600, value=v3_def, step=5, label_visibility="collapsed", key=f"e_pm10_{selected_city}_{sim_preset}")
+        st.markdown(f"""
+            <div class="telemetry-footer">
+                <span>Std: &lt;100 µg/m³</span>
+                <span style="font-weight:700; color:{'#ef4444' if in_3 > 250 else '#f59e0b' if in_3 > 100 else '#10b981'};">
+                    {'🔴 High Dust' if in_3 > 250 else '🟡 Moderate' if in_3 > 100 else '🟢 Normal'}
+                </span>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
     with col4:
-        in_4 = st.slider("Temperature (°C)", 10, 50, int(city_prof["temp"]), key=f"e_tmp_{selected_city}")
+        st.markdown(f"""
+        <div class="telemetry-card">
+            <div class="telemetry-header">
+                <span class="telemetry-title">🌡️ Ambient Temp</span>
+                <span class="telemetry-badge">Base: {city_prof['temp']} °C</span>
+            </div>
+        """, unsafe_allow_html=True)
+        in_4 = st.number_input("Temperature (°C)", min_value=10, max_value=50, value=v4_def, step=1, label_visibility="collapsed", key=f"e_tmp_{selected_city}_{sim_preset}")
+        st.markdown(f"""
+            <div class="telemetry-footer">
+                <span>Range: 10–50 °C</span>
+                <span style="font-weight:700; color:{'#ef4444' if in_4 > 42 else '#f59e0b' if in_4 > 38 else '#10b981'};">
+                    {'🔴 Heat Stress' if in_4 > 42 else '🟡 Warm' if in_4 > 38 else '🟢 Optimal'}
+                </span>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
 
 # Analyze Button
-_, btn_center, _ = st.columns([1, 2, 1])
+_, btn_center, _ = st.columns([1.2, 1.6, 1.2])
 with btn_center:
-    st.button("🔮 ANALYZE", use_container_width=True)
+    st.button("🔮 RUN AI INFERENCE & DISPATCH", use_container_width=True)
 
 # ============================================================
 # DYNAMIC ML INFERENCE CALCULATION FOR SELECTED CITY & INPUTS
