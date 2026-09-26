@@ -9,8 +9,8 @@ from datetime import datetime
 # PAGE CONFIGURATION
 # ============================================================
 st.set_page_config(
-    page_title="CivicGuard | AI Urban Intelligence Platform",
-    page_icon="🛡️",
+    page_title="CityInsight AI | Urban Intelligence Platform",
+    page_icon="🏙️",
     layout="wide",
     initial_sidebar_state="collapsed"
 )
@@ -199,23 +199,29 @@ st.markdown("""
         background-color: #f8fafc !important;
         color: #0f172a !important;
     }
-    .main { background-color: #f8fafc !important; padding-top: 0.1rem !important; }
-    .block-container { padding-top: 0.8rem !important; max-width: 96% !important; }
+    header[data-testid="stHeader"] {
+        background: transparent !important;
+        height: 2.5rem !important;
+    }
+    .main { background-color: #f8fafc !important; }
+    .block-container { padding-top: 3.2rem !important; padding-bottom: 2rem !important; max-width: 96% !important; }
     
     /* Header brand */
     .brand-wrap {
         display: flex;
         align-items: center;
-        gap: 12px;
+        gap: 14px;
+        padding: 4px 0 8px 0;
     }
     .brand-title {
-        font-size: 24px;
+        font-size: 28px;
         font-weight: 800;
         color: #0f172a;
         line-height: 1.1;
+        letter-spacing: -0.5px;
     }
     .brand-title span { color: #0284c7; }
-    .brand-sub { font-size: 11.5px; color: #475569; font-weight: 500; }
+    .brand-sub { font-size: 12px; color: #475569; font-weight: 600; margin-top: 3px; }
     
     /* Modern Light Cards */
     .glass-card {
@@ -395,12 +401,12 @@ def light_chart(fig, height=235):
 # ============================================================
 # TOP HEADER BAR
 # ============================================================
-hdr_c1, hdr_c2, hdr_c3 = st.columns([3.2, 1.4, 1.4])
+hdr_c1, hdr_c2, hdr_c3 = st.columns([3.0, 1.5, 1.5])
 
 with hdr_c1:
     st.markdown("""
     <div class="brand-wrap">
-        <div style="font-size:32px;">🛡️</div>
+        <div style="font-size:36px; line-height:1;">🛡️</div>
         <div>
             <div class="brand-title">Civic<span>guard</span></div>
             <div class="brand-sub">AI-Powered Multi-Domain Urban Intelligence • College Hackathon Edition</div>
