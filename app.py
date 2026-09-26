@@ -194,24 +194,36 @@ st.markdown("""
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
     * { font-family: 'Plus Jakarta Sans', sans-serif !important; }
     
-    /* Light background for the application */
+    /* Hide Streamlit default white top navbar */
+    header[data-testid="stHeader"], [data-testid="stHeader"] {
+        display: none !important;
+        visibility: hidden !important;
+        height: 0px !important;
+    }
+    #MainMenu, footer {
+        visibility: hidden !important;
+        display: none !important;
+    }
+    
     .stApp, [data-testid="stAppViewContainer"], [data-testid="stMain"] {
         background-color: #f8fafc !important;
         color: #0f172a !important;
     }
-    header[data-testid="stHeader"] {
-        background: transparent !important;
-        height: 2.5rem !important;
+    .main { 
+        background-color: #f8fafc !important; 
+        padding-top: 0.8rem !important; 
     }
-    .main { background-color: #f8fafc !important; }
-    .block-container { padding-top: 3.2rem !important; padding-bottom: 2rem !important; max-width: 96% !important; }
+    .block-container { 
+        padding-top: 1.2rem !important; 
+        padding-bottom: 2rem !important; 
+        max-width: 96% !important; 
+    }
     
     /* Header brand */
     .brand-wrap {
         display: flex;
         align-items: center;
         gap: 14px;
-        padding: 4px 0 8px 0;
     }
     .brand-title {
         font-size: 28px;
@@ -399,16 +411,16 @@ def light_chart(fig, height=235):
     return fig
 
 # ============================================================
-# TOP HEADER BAR
+# TOP HEADER BAR: "Civicguard"
 # ============================================================
 hdr_c1, hdr_c2, hdr_c3 = st.columns([3.0, 1.5, 1.5])
 
 with hdr_c1:
     st.markdown("""
-    <div class="brand-wrap">
-        <div style="font-size:36px; line-height:1;">🛡️</div>
+    <div class="brand-wrap" style="padding-top: 2px;">
+        <div style="font-size:38px; line-height:1;">🛡️</div>
         <div>
-            <div class="brand-title">Civic<span>guard</span></div>
+            <div class="brand-title">Civic<span style="color:#0284c7;">guard</span></div>
             <div class="brand-sub">AI-Powered Multi-Domain Urban Intelligence • College Hackathon Edition</div>
         </div>
     </div>
