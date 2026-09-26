@@ -9,8 +9,8 @@ from datetime import datetime
 # PAGE CONFIGURATION
 # ============================================================
 st.set_page_config(
-    page_title="CityInsight AI | Urban Intelligence Platform",
-    page_icon="🏙️",
+    page_title="CivicGuard | AI Urban Intelligence Platform",
+    page_icon="🛡️",
     layout="wide",
     initial_sidebar_state="collapsed"
 )
@@ -187,14 +187,14 @@ THEME_RECORDS = {
 }
 
 # ============================================================
-# CRISP & MODERN LIGHT THEME CSS (MAXIMUM CLARITY)
+# CRISP & MODERN LIGHT THEME CSS WITH MOBILE RESPONSIVENESS
 # ============================================================
 st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
-    * { font-family: 'Plus Jakarta Sans', sans-serif !important; }
+    * { font-family: 'Plus Jakarta Sans', sans-serif !important; box-sizing: border-box; }
     
-    /* Hide Streamlit default white top navbar */
+    /* Hide Streamlit default top navbar */
     header[data-testid="stHeader"], [data-testid="stHeader"] {
         display: none !important;
         visibility: hidden !important;
@@ -211,11 +211,13 @@ st.markdown("""
     }
     .main { 
         background-color: #f8fafc !important; 
-        padding-top: 0.8rem !important; 
+        padding-top: 0.5rem !important; 
     }
     .block-container { 
-        padding-top: 1.2rem !important; 
+        padding-top: 1rem !important; 
         padding-bottom: 2rem !important; 
+        padding-left: 1.5rem !important;
+        padding-right: 1.5rem !important;
         max-width: 96% !important; 
     }
     
@@ -223,17 +225,18 @@ st.markdown("""
     .brand-wrap {
         display: flex;
         align-items: center;
-        gap: 14px;
+        gap: 12px;
+        flex-wrap: wrap;
     }
     .brand-title {
-        font-size: 28px;
+        font-size: 26px;
         font-weight: 800;
         color: #0f172a;
-        line-height: 1.1;
+        line-height: 1.15;
         letter-spacing: -0.5px;
     }
     .brand-title span { color: #0284c7; }
-    .brand-sub { font-size: 12px; color: #475569; font-weight: 600; margin-top: 3px; }
+    .brand-sub { font-size: 11.5px; color: #475569; font-weight: 600; margin-top: 2px; }
     
     /* Modern Light Cards */
     .glass-card {
@@ -261,7 +264,7 @@ st.markdown("""
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
     }
     .kpi-cell-title {
-        font-size: 11px;
+        font-size: 10.5px;
         font-weight: 700;
         color: #475569;
         text-transform: uppercase;
@@ -269,7 +272,7 @@ st.markdown("""
         margin-bottom: 4px;
     }
     .kpi-cell-val {
-        font-size: 21px;
+        font-size: 20px;
         font-weight: 800;
         color: #0f172a;
     }
@@ -277,7 +280,7 @@ st.markdown("""
     /* Prediction Large Box */
     .pred-box {
         border-radius: 12px;
-        padding: 16px 22px;
+        padding: 16px 20px;
         margin-bottom: 14px;
         display: flex;
         justify-content: space-between;
@@ -345,6 +348,14 @@ st.markdown("""
         display: flex;
         justify-content: space-between;
     }
+
+    /* Summary Grid */
+    .summary-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 14px;
+        text-align: left;
+    }
     
     /* Clean Light Streamlit Controls */
     div[data-baseweb="select"] > div {
@@ -362,8 +373,9 @@ st.markdown("""
         font-weight: 700 !important;
         border: none !important;
         border-radius: 8px !important;
-        padding: 9px 24px !important;
+        padding: 10px 24px !important;
         box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25) !important;
+        width: 100% !important;
     }
     .stButton > button:hover {
         background: linear-gradient(90deg, #0369a1 0%, #075985 100%) !important;
@@ -385,6 +397,74 @@ st.markdown("""
         color: #334155 !important;
         font-weight: 600 !important;
     }
+
+    /* ============================================================
+       RESPONSIVE MEDIA QUERIES (TABLETS & SMARTPHONES)
+       ============================================================ */
+    @media (max-width: 900px) {
+        .block-container {
+            padding-left: 0.8rem !important;
+            padding-right: 0.8rem !important;
+            padding-top: 0.8rem !important;
+            max-width: 100% !important;
+        }
+        .brand-wrap {
+            gap: 10px;
+        }
+        .brand-title {
+            font-size: 22px !important;
+        }
+        .brand-sub {
+            font-size: 11px !important;
+        }
+        .kpi-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 8px !important;
+        }
+        .kpi-cell {
+            padding: 10px 12px !important;
+        }
+        .kpi-cell-val {
+            font-size: 17px !important;
+        }
+        .pred-box {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            gap: 12px !important;
+            padding: 14px 16px !important;
+        }
+        .pred-box > div:last-child {
+            text-align: left !important;
+            width: 100% !important;
+            border-top: 1px dashed rgba(0,0,0,0.1);
+            padding-top: 8px !important;
+        }
+        .summary-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 10px !important;
+        }
+        .rec-meta {
+            flex-direction: column !important;
+            gap: 6px !important;
+        }
+    }
+
+    @media (max-width: 540px) {
+        .brand-title {
+            font-size: 19px !important;
+        }
+        .kpi-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 6px !important;
+        }
+        .kpi-cell-val {
+            font-size: 15px !important;
+        }
+        .summary-grid {
+            grid-template-columns: 1fr !important;
+            gap: 8px !important;
+        }
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -394,7 +474,7 @@ def light_chart(fig, height=235):
         paper_bgcolor="#ffffff",
         plot_bgcolor="#ffffff",
         font=dict(family="Plus Jakarta Sans", color="#334155", size=10.5),
-        margin=dict(l=28, r=18, t=32, b=24),
+        margin=dict(l=24, r=16, t=30, b=22),
         legend=dict(
             bgcolor="rgba(255,255,255,0.85)",
             bordercolor="#e2e8f0",
@@ -413,14 +493,14 @@ def light_chart(fig, height=235):
 # ============================================================
 # TOP HEADER BAR: "Civicguard"
 # ============================================================
-hdr_c1, hdr_c2, hdr_c3 = st.columns([3.0, 1.5, 1.5])
+hdr_c1, hdr_c2, hdr_c3 = st.columns([2.8, 1.5, 1.5])
 
 with hdr_c1:
     st.markdown("""
-    <div class="brand-wrap" style="padding-top: 2px;">
-        <div style="font-size:38px; line-height:1;">🛡️</div>
+    <div class="brand-wrap">
+        <div style="font-size:36px; line-height:1;">🛡️</div>
         <div>
-            <div class="brand-title">Civic<span style="color:#0284c7;">guard</span></div>
+            <div class="brand-title">Civic<span>guard</span></div>
             <div class="brand-sub">AI-Powered Multi-Domain Urban Intelligence • College Hackathon Edition</div>
         </div>
     </div>
@@ -683,14 +763,14 @@ st.markdown(f"""
 <div class="pred-box pred-{status_color}">
     <div>
         <div style="font-size:11px; font-weight:700; color:#64748b; text-transform:uppercase; letter-spacing:0.5px;">🤖 AI Model Inference Output</div>
-        <div style="font-size:25px; font-weight:800; color:{pred_title_color}; margin:3px 0;">{pred_label}</div>
+        <div style="font-size:24px; font-weight:800; color:{pred_title_color}; margin:3px 0;">{pred_label}</div>
         <div style="font-size:12.5px; color:#334155;">
             <b>Theme:</b> {selected_theme} &nbsp;|&nbsp; <b>Location:</b> {selected_city} ({city_prof['state']})
         </div>
     </div>
-    <div style="text-align:right;">
+    <div>
         <div style="font-size:12px; font-weight:700; color:#475569; margin-bottom:3px;">{badge_status}</div>
-        <div style="font-size:28px; font-weight:800; color:#0284c7;">{conf_val:.1f}% <span style="font-size:12px; color:#64748b; font-weight:600;">Confidence</span></div>
+        <div style="font-size:26px; font-weight:800; color:#0284c7;">{conf_val:.1f}% <span style="font-size:12px; color:#64748b; font-weight:600;">Confidence</span></div>
     </div>
 </div>
 """, unsafe_allow_html=True)
@@ -1053,7 +1133,7 @@ with side_col:
 st.markdown("### 📋 Data Summary")
 st.markdown(f"""
 <div class="glass-card" style="margin-top: 4px; padding: 14px 20px;">
-    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; text-align: left;">
+    <div class="summary-grid">
         <div>
             <div style="font-size: 11px; color: #64748b; text-transform: uppercase; font-weight:700;">Active Theme</div>
             <div style="font-size: 14px; font-weight: 700; color: #0f172a; margin-top: 2px;">{selected_theme}</div>
