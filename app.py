@@ -9,7 +9,7 @@ from datetime import datetime
 # PAGE CONFIGURATION
 # ============================================================
 st.set_page_config(
-    page_title="CityInsight AI | Smart City Intelligence",
+    page_title="CityInsight AI | Urban Intelligence Platform",
     page_icon="🏙️",
     layout="wide",
     initial_sidebar_state="collapsed"
@@ -187,19 +187,20 @@ THEME_RECORDS = {
 }
 
 # ============================================================
-# CLEAN MODERN DARK CSS
+# CRISP & MODERN LIGHT THEME CSS (MAXIMUM CLARITY)
 # ============================================================
 st.markdown("""
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
     * { font-family: 'Plus Jakarta Sans', sans-serif !important; }
     
+    /* Light background for the application */
     .stApp, [data-testid="stAppViewContainer"], [data-testid="stMain"] {
-        background-color: #070d1e !important;
-        color: #e2e8f0 !important;
+        background-color: #f8fafc !important;
+        color: #0f172a !important;
     }
-    .main { background-color: #070d1e !important; padding-top: 0.1rem !important; }
-    .block-container { padding-top: 0.8rem !important; max-width: 95% !important; }
+    .main { background-color: #f8fafc !important; padding-top: 0.1rem !important; }
+    .block-container { padding-top: 0.8rem !important; max-width: 96% !important; }
     
     /* Header brand */
     .brand-wrap {
@@ -210,20 +211,20 @@ st.markdown("""
     .brand-title {
         font-size: 24px;
         font-weight: 800;
-        color: #ffffff;
+        color: #0f172a;
         line-height: 1.1;
     }
-    .brand-title span { color: #38bdf8; }
-    .brand-sub { font-size: 11px; color: #64748b; font-weight: 500; }
+    .brand-title span { color: #0284c7; }
+    .brand-sub { font-size: 11.5px; color: #475569; font-weight: 500; }
     
-    /* Unified Card Containers */
+    /* Modern Light Cards */
     .glass-card {
-        background: #0d1738;
-        border: 1px solid #1a2850;
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
         border-radius: 12px;
         padding: 14px 18px;
         margin-bottom: 12px;
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
     }
     
     /* 4 KPI Grid */
@@ -234,105 +235,108 @@ st.markdown("""
         margin: 12px 0;
     }
     .kpi-cell {
-        background: #0d1738;
-        border: 1px solid #1a2850;
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
         border-radius: 10px;
-        padding: 12px 14px;
+        padding: 12px 16px;
         text-align: left;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
     }
     .kpi-cell-title {
         font-size: 11px;
-        font-weight: 600;
-        color: #94a3b8;
+        font-weight: 700;
+        color: #475569;
         text-transform: uppercase;
-        letter-spacing: 0.4px;
+        letter-spacing: 0.5px;
         margin-bottom: 4px;
     }
     .kpi-cell-val {
         font-size: 21px;
         font-weight: 800;
-        color: #ffffff;
+        color: #0f172a;
     }
     
     /* Prediction Large Box */
     .pred-box {
         border-radius: 12px;
-        padding: 14px 20px;
+        padding: 16px 22px;
         margin-bottom: 14px;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+        box-shadow: 0 4px 14px rgba(0,0,0,0.06);
     }
     .pred-red {
-        background: linear-gradient(135deg, rgba(239, 68, 68, 0.18) 0%, rgba(13, 23, 56, 0.95) 100%);
+        background: #fef2f2;
         border: 1.5px solid #ef4444;
     }
     .pred-orange {
-        background: linear-gradient(135deg, rgba(245, 158, 11, 0.18) 0%, rgba(13, 23, 56, 0.95) 100%);
+        background: #fffbeb;
         border: 1.5px solid #f59e0b;
     }
     .pred-green {
-        background: linear-gradient(135deg, rgba(16, 185, 129, 0.18) 0%, rgba(13, 23, 56, 0.95) 100%);
+        background: #f0fdf4;
         border: 1.5px solid #10b981;
     }
     
     /* Recommendations Box & Actions */
     .rec-box {
-        background: #0d1738;
-        border: 1px solid #1a2850;
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
         border-radius: 12px;
         padding: 16px 18px;
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
         height: 100%;
     }
     .rec-badge {
         display: inline-block;
-        font-size: 10.5px;
-        font-weight: 700;
+        font-size: 11px;
+        font-weight: 800;
         text-transform: uppercase;
         letter-spacing: 0.5px;
-        padding: 3px 10px;
+        padding: 4px 12px;
         border-radius: 6px;
         margin-bottom: 12px;
     }
-    .badge-red { background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid #ef4444; }
-    .badge-orange { background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid #f59e0b; }
-    .badge-green { background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid #10b981; }
+    .badge-red { background: #fee2e2; color: #b91c1c; border: 1px solid #f87171; }
+    .badge-orange { background: #fef3c7; color: #b45309; border: 1px solid #fcd34d; }
+    .badge-green { background: #dcfce7; color: #15803d; border: 1px solid #86efac; }
 
     .action-item {
-        background: #081028;
-        border: 1px solid #162347;
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
         border-radius: 8px;
         padding: 11px 13px;
         margin-bottom: 9px;
         font-size: 12px;
-        line-height: 1.45;
+        line-height: 1.5;
+        color: #1e293b;
     }
-    .action-item-red { border-left: 4px solid #ef4444; }
-    .action-item-orange { border-left: 4px solid #f59e0b; }
-    .action-item-green { border-left: 4px solid #10b981; }
+    .action-item-red { border-left: 4.5px solid #ef4444; }
+    .action-item-orange { border-left: 4.5px solid #f59e0b; }
+    .action-item-green { border-left: 4.5px solid #10b981; }
 
     .rec-meta {
-        background: #070d1e;
-        border: 1px dashed #1a2850;
+        background: #f1f5f9;
+        border: 1px dashed #cbd5e1;
         border-radius: 8px;
         padding: 10px 12px;
         margin-top: 12px;
-        font-size: 11px;
-        color: #94a3b8;
+        font-size: 11.5px;
+        color: #475569;
         display: flex;
         justify-content: space-between;
     }
     
-    /* Streamlit overrides */
+    /* Clean Light Streamlit Controls */
     div[data-baseweb="select"] > div {
-        background-color: #0d1738 !important;
-        border-color: #1a2850 !important;
-        color: #ffffff !important;
+        background-color: #ffffff !important;
+        border-color: #cbd5e1 !important;
+        color: #0f172a !important;
+        border-radius: 8px !important;
     }
     .stSlider > div {
-        color: #38bdf8 !important;
+        color: #0284c7 !important;
     }
     .stButton > button {
         background: linear-gradient(90deg, #0284c7 0%, #0369a1 100%) !important;
@@ -341,41 +345,51 @@ st.markdown("""
         border: none !important;
         border-radius: 8px !important;
         padding: 9px 24px !important;
-        box-shadow: 0 4px 14px rgba(2, 132, 199, 0.4) !important;
+        box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25) !important;
     }
     .stButton > button:hover {
         background: linear-gradient(90deg, #0369a1 0%, #075985 100%) !important;
     }
     
     div[data-testid="stNumberInput"] input {
-        background: #0f1c3a !important;
-        border: 1px solid #1e2f5f !important;
-        color: #ffffff !important;
+        background: #ffffff !important;
+        border: 1px solid #cbd5e1 !important;
+        color: #0f172a !important;
         border-radius: 8px !important;
+    }
+
+    /* Headings */
+    h3 {
+        color: #0f172a !important;
+        font-weight: 700 !important;
+    }
+    label {
+        color: #334155 !important;
+        font-weight: 600 !important;
     }
 </style>
 """, unsafe_allow_html=True)
 
-def dark_chart(fig, height=235):
+def light_chart(fig, height=235):
     fig.update_layout(
         height=height,
-        paper_bgcolor="#0d1738",
-        plot_bgcolor="#0d1738",
-        font=dict(family="Plus Jakarta Sans", color="#94a3b8", size=10.5),
+        paper_bgcolor="#ffffff",
+        plot_bgcolor="#ffffff",
+        font=dict(family="Plus Jakarta Sans", color="#334155", size=10.5),
         margin=dict(l=28, r=18, t=32, b=24),
         legend=dict(
-            bgcolor="rgba(13,23,56,0.6)",
-            bordercolor="#1e2f5f",
+            bgcolor="rgba(255,255,255,0.85)",
+            bordercolor="#e2e8f0",
             borderwidth=1,
             orientation="h",
             y=1.14,
             x=1,
             xanchor="right",
-            font=dict(size=9.5, color="#cbd5e1")
+            font=dict(size=9.5, color="#1e293b")
         ),
     )
-    fig.update_xaxes(showgrid=True, gridcolor="#162347", linecolor="#162347", tickfont=dict(color="#94a3b8", size=9.5))
-    fig.update_yaxes(showgrid=True, gridcolor="#162347", linecolor="#162347", tickfont=dict(color="#94a3b8", size=9.5))
+    fig.update_xaxes(showgrid=True, gridcolor="#f1f5f9", linecolor="#cbd5e1", tickfont=dict(color="#475569", size=9.5))
+    fig.update_yaxes(showgrid=True, gridcolor="#f1f5f9", linecolor="#cbd5e1", tickfont=dict(color="#475569", size=9.5))
     return fig
 
 # ============================================================
@@ -408,9 +422,8 @@ city_prof = get_city_profile(selected_city)
 # ============================================================
 st.markdown(f"""
 <div class="glass-card" style="margin-top: 6px;">
-    <div style="font-size:14px; font-weight:700; color:#ffffff; display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-        <div>🎯 Analyze Your Data — <span style="color:#38bdf8;">{selected_city}</span> <span style="font-size:11px; color:#94a3b8; font-weight:400;">({city_prof['state']})</span></div>
-        <div style="font-size:11px; color:#64748b;">Telemetry Stations: <b style="color:#38bdf8;">{city_prof['stations']}</b></div>
+    <div style="font-size:14px; font-weight:700; color:#0f172a; margin-bottom:4px;">
+        🎯 Analyze Your Data — <span style="color:#0284c7;">{selected_city}</span> <span style="font-size:11.5px; color:#64748b; font-weight:500;">({city_prof['state']})</span>
     </div>
 </div>
 """, unsafe_allow_html=True)
@@ -585,7 +598,6 @@ elif selected_theme == "📱 Social Media":
         conf_val = 80.0 + (1 - viral_score) * 8.0
 
 elif selected_theme == "🌱 Environment":
-    # Authentic CPCB AQI inference based on multi-pollutant inputs
     comp_aqi = max(in_1, int((in_2 / 60.0) * 100), int((in_3 / 100.0) * 100))
     if comp_aqi >= 300:
         pred_label = "SEVERE / HAZARDOUS SMOG"
@@ -614,8 +626,10 @@ elif selected_theme == "🌱 Environment":
         conf_val = 94.5
 
 # ============================================================
-# 4 KEY KPI METRIC CARDS
+# 4 KEY KPI METRIC CARDS (LIGHT THEME)
 # ============================================================
+val_color = '#dc2626' if status_color == 'red' else '#d97706' if status_color == 'orange' else '#059669'
+
 st.markdown(f"""
 <div class="kpi-grid">
     <div class="kpi-cell">
@@ -624,13 +638,13 @@ st.markdown(f"""
     </div>
     <div class="kpi-cell">
         <div class="kpi-cell-title">🚨 City Severity Level</div>
-        <div class="kpi-cell-val" style="font-size:16px; color:{'#f87171' if status_color == 'red' else '#fbbf24' if status_color == 'orange' else '#34d399'};">
+        <div class="kpi-cell-val" style="font-size:16px; color:{val_color};">
             {risk_level}
         </div>
     </div>
     <div class="kpi-cell">
         <div class="kpi-cell-title">🤖 AI Prediction</div>
-        <div class="kpi-cell-val" style="font-size:16px; color:#38bdf8;">
+        <div class="kpi-cell-val" style="font-size:16px; color:#0284c7;">
             {pred_label}
         </div>
     </div>
@@ -645,19 +659,20 @@ st.markdown(f"""
 # PREDICTION CARD (LARGE & PROMINENT)
 # ============================================================
 badge_status = "🔴 High Risk / Alert" if status_color == "red" else "🟠 Medium / Moderate" if status_color == "orange" else "🟢 Low Risk / Optimal"
+pred_title_color = "#b91c1c" if status_color == "red" else "#b45309" if status_color == "orange" else "#15803d"
 
 st.markdown(f"""
 <div class="pred-box pred-{status_color}">
     <div>
-        <div style="font-size:11px; font-weight:700; color:#94a3b8; text-transform:uppercase; letter-spacing:0.5px;">🤖 AI Model Inference Output</div>
-        <div style="font-size:25px; font-weight:800; color:#ffffff; margin:3px 0;">{pred_label}</div>
-        <div style="font-size:12px; color:#cbd5e1;">
+        <div style="font-size:11px; font-weight:700; color:#64748b; text-transform:uppercase; letter-spacing:0.5px;">🤖 AI Model Inference Output</div>
+        <div style="font-size:25px; font-weight:800; color:{pred_title_color}; margin:3px 0;">{pred_label}</div>
+        <div style="font-size:12.5px; color:#334155;">
             <b>Theme:</b> {selected_theme} &nbsp;|&nbsp; <b>Location:</b> {selected_city} ({city_prof['state']})
         </div>
     </div>
     <div style="text-align:right;">
-        <div style="font-size:12px; font-weight:700; color:#cbd5e1; margin-bottom:3px;">{badge_status}</div>
-        <div style="font-size:28px; font-weight:800; color:#38bdf8;">{conf_val:.1f}% <span style="font-size:12px; color:#94a3b8; font-weight:500;">Confidence</span></div>
+        <div style="font-size:12px; font-weight:700; color:#475569; margin-bottom:3px;">{badge_status}</div>
+        <div style="font-size:28px; font-weight:800; color:#0284c7;">{conf_val:.1f}% <span style="font-size:12px; color:#64748b; font-weight:600;">Confidence</span></div>
     </div>
 </div>
 """, unsafe_allow_html=True)
@@ -679,20 +694,20 @@ with plot_col:
         pred_rf = [int(in_1 * f) for f in [0.2, 0.25, 0.35, 0.45, 0.75, 1.1, 1.45, 1.6, 1.35, 0.85, 0.4, 0.2]]
         
         fig1 = go.Figure()
-        fig1.add_trace(go.Scatter(x=months, y=hist_rf, mode='lines+markers', name="Historical Avg (mm)", line=dict(color="#38bdf8", width=2)))
+        fig1.add_trace(go.Scatter(x=months, y=hist_rf, mode='lines+markers', name="Historical Avg (mm)", line=dict(color="#0284c7", width=2)))
         fig1.add_trace(go.Scatter(x=months, y=pred_rf, mode='lines+markers', name="🤖 Predicted Scenario (mm)", 
-                                  line=dict(color="#ef4444" if status_color == "red" else "#f59e0b" if status_color == "orange" else "#10b981", width=3)))
-        fig1.add_hline(y=250, line_dash="dash", line_color="#ef4444", annotation_text="⚠️ Flood Alert Level (250mm)", annotation_position="top right", annotation_font_color="#ef4444")
-        fig1.update_layout(title=dict(text=f"Monsoon Inflow vs AI Prediction for {selected_city}", font=dict(color="#ffffff", size=11)))
-        dark_chart(fig1, height=225)
+                                  line=dict(color="#dc2626" if status_color == "red" else "#d97706" if status_color == "orange" else "#059669", width=3)))
+        fig1.add_hline(y=250, line_dash="dash", line_color="#dc2626", annotation_text="⚠️ Flood Alert Level (250mm)", annotation_position="top right", annotation_font_color="#dc2626")
+        fig1.update_layout(title=dict(text=f"Monsoon Inflow vs AI Prediction for {selected_city}", font=dict(color="#0f172a", size=12)))
+        light_chart(fig1, height=225)
         st.plotly_chart(fig1, use_container_width=True, config={"displayModeBar": False})
 
         wl_curve = [round(float(in_4) * f, 1) for f in [0.45, 0.48, 0.55, 0.65, 0.85, 1.15, 1.4, 1.3, 1.05, 0.8, 0.55, 0.45]]
-        colors = ["#ef4444" if v >= 9.0 else "#f59e0b" if v >= 6.0 else "#38bdf8" for v in wl_curve]
+        colors = ["#dc2626" if v >= 9.0 else "#d97706" if v >= 6.0 else "#0284c7" for v in wl_curve]
         fig2 = go.Figure(go.Bar(x=months, y=wl_curve, marker_color=colors, name="Water Level (m)"))
-        fig2.add_hline(y=10.0, line_dash="dash", line_color="#ef4444", annotation_text="⚠️ Spillway Capacity Limit (10m)", annotation_position="top right", annotation_font_color="#ef4444")
-        fig2.update_layout(title=dict(text=f"Reservoir Water Level & Spillway Risk ({selected_city})", font=dict(color="#ffffff", size=11)))
-        dark_chart(fig2, height=225)
+        fig2.add_hline(y=10.0, line_dash="dash", line_color="#dc2626", annotation_text="⚠️ Spillway Capacity Limit (10m)", annotation_position="top right", annotation_font_color="#dc2626")
+        fig2.update_layout(title=dict(text=f"Reservoir Water Level & Spillway Risk ({selected_city})", font=dict(color="#0f172a", size=12)))
+        light_chart(fig2, height=225)
         st.plotly_chart(fig2, use_container_width=True, config={"displayModeBar": False})
 
     # -------------------------------------------------------------
@@ -704,24 +719,24 @@ with plot_col:
         pred_tr = [int(in_1 * f) for f in [0.2, 0.15, 0.1, 0.08, 0.15, 0.3, 0.6, 0.9, 0.95, 0.75, 0.65, 0.6, 0.65, 0.7, 0.75, 0.85, 0.95, 1.0, 0.9, 0.75, 0.6, 0.45, 0.35, 0.25]]
 
         fig1 = go.Figure()
-        fig1.add_trace(go.Scatter(x=hrs, y=base_tr, name="Base City Flow", line=dict(color="#64748b", width=1.5, dash='dot')))
+        fig1.add_trace(go.Scatter(x=hrs, y=base_tr, name="Base City Flow", line=dict(color="#94a3b8", width=1.5, dash='dot')))
         fig1.add_trace(go.Scatter(x=hrs, y=pred_tr, fill='tozeroy', name="🤖 Predicted Hourly Load", 
-                                  line=dict(color="#ef4444" if status_color == "red" else "#f59e0b" if status_color == "orange" else "#38bdf8", width=2.5)))
-        fig1.add_hline(y=7500, line_dash="dash", line_color="#ef4444", annotation_text="⚠️ Corridor Saturation Capacity (7,500 veh/hr)", annotation_position="top right", annotation_font_color="#ef4444")
-        fig1.update_layout(title=dict(text=f"24-Hour Corridor Traffic Volume vs Critical Capacity — {selected_city}", font=dict(color="#ffffff", size=11)))
-        dark_chart(fig1, height=225)
+                                  line=dict(color="#dc2626" if status_color == "red" else "#d97706" if status_color == "orange" else "#0284c7", width=2.5)))
+        fig1.add_hline(y=7500, line_dash="dash", line_color="#dc2626", annotation_text="⚠️ Corridor Saturation (7,500 veh/hr)", annotation_position="top right", annotation_font_color="#dc2626")
+        fig1.update_layout(title=dict(text=f"24-Hour Corridor Traffic Volume vs Critical Capacity — {selected_city}", font=dict(color="#0f172a", size=12)))
+        light_chart(fig1, height=225)
         st.plotly_chart(fig1, use_container_width=True, config={"displayModeBar": False})
 
         sectors = ["Outer Ring Road", "Downtown Core", "Tech Park Corridor", "Metro Transit Hub", "Airport Expressway", "Industrial Zone"]
         occ_factors = [0.85, 1.25, 1.15, 0.95, 0.70, 0.60]
         base_occ = min(98.0, (in_1 / 15000.0) * 85.0 + ((90.0 - in_2) / 90.0) * 15.0)
         sector_occ = [round(min(99.0, max(15.0, base_occ * f)), 1) for f in occ_factors]
-        occ_colors = ["#ef4444" if v >= 80.0 else "#f59e0b" if v >= 55.0 else "#10b981" for v in sector_occ]
+        occ_colors = ["#dc2626" if v >= 80.0 else "#d97706" if v >= 55.0 else "#059669" for v in sector_occ]
         
         fig2 = go.Figure(go.Bar(x=sectors, y=sector_occ, marker_color=occ_colors, name="Sensor Occupancy %"))
-        fig2.add_hline(y=80.0, line_dash="dash", line_color="#ef4444", annotation_text="⚠️ Bottleneck Saturation (80%)", annotation_position="top right", annotation_font_color="#ef4444")
-        fig2.update_layout(title=dict(text=f"IoT Sensor Grid Occupancy Rate (%) across Urban Sectors (data/smart_city.csv.csv)", font=dict(color="#ffffff", size=11)))
-        dark_chart(fig2, height=225)
+        fig2.add_hline(y=80.0, line_dash="dash", line_color="#dc2626", annotation_text="⚠️ Bottleneck Saturation (80%)", annotation_position="top right", annotation_font_color="#dc2626")
+        fig2.update_layout(title=dict(text=f"IoT Sensor Grid Occupancy Rate (%) across Urban Sectors (data/smart_city.csv.csv)", font=dict(color="#0f172a", size=12)))
+        light_chart(fig2, height=225)
         st.plotly_chart(fig2, use_container_width=True, config={"displayModeBar": False})
 
     # -------------------------------------------------------------
@@ -733,18 +748,18 @@ with plot_col:
         e_curve = [int(in_2 * f) for f in [0.72, 0.75, 0.80, 0.85, 0.89, 0.93, 0.98, 1.02]]
         
         fig1 = go.Figure()
-        fig1.add_trace(go.Scatter(x=qtrs, y=r_curve, name="Revenue Forecast (₹ L)", line=dict(color="#38bdf8", width=2.5), mode='lines+markers'))
-        fig1.add_trace(go.Scatter(x=qtrs, y=e_curve, name="Operating Expenses (₹ L)", line=dict(color="#f87171", width=2.5), mode='lines+markers'))
-        fig1.update_layout(title=dict(text=f"Quarterly Fiscal Trajectory & Prediction — {selected_city}", font=dict(color="#ffffff", size=11)))
-        dark_chart(fig1, height=225)
+        fig1.add_trace(go.Scatter(x=qtrs, y=r_curve, name="Revenue Forecast (₹ L)", line=dict(color="#0284c7", width=2.5), mode='lines+markers'))
+        fig1.add_trace(go.Scatter(x=qtrs, y=e_curve, name="Operating Expenses (₹ L)", line=dict(color="#e11d48", width=2.5), mode='lines+markers'))
+        fig1.update_layout(title=dict(text=f"Quarterly Fiscal Trajectory & Prediction — {selected_city}", font=dict(color="#0f172a", size=12)))
+        light_chart(fig1, height=225)
         st.plotly_chart(fig1, use_container_width=True, config={"displayModeBar": False})
 
         diff = [r - e for r, e in zip(r_curve, e_curve)]
-        bar_colors = ["#10b981" if d >= 0 else "#ef4444" for d in diff]
+        bar_colors = ["#059669" if d >= 0 else "#dc2626" for d in diff]
         fig2 = go.Figure(go.Bar(x=qtrs, y=diff, marker_color=bar_colors, name="Net Margin (₹ L)"))
-        fig2.add_hline(y=0, line_dash="solid", line_color="#94a3b8", annotation_text="Break-even ₹0", annotation_position="top left", annotation_font_color="#94a3b8")
-        fig2.update_layout(title=dict(text=f"Net Operating Margin & Fiscal Health ({selected_city})", font=dict(color="#ffffff", size=11)))
-        dark_chart(fig2, height=225)
+        fig2.add_hline(y=0, line_dash="solid", line_color="#64748b", annotation_text="Break-even ₹0", annotation_position="top left", annotation_font_color="#475569")
+        fig2.update_layout(title=dict(text=f"Net Operating Margin & Fiscal Health ({selected_city})", font=dict(color="#0f172a", size=12)))
+        light_chart(fig2, height=225)
         st.plotly_chart(fig2, use_container_width=True, config={"displayModeBar": False})
 
     # -------------------------------------------------------------
@@ -753,20 +768,20 @@ with plot_col:
     elif selected_theme == "🛡️ Cyber & Network":
         attack_types = ["DDoS Incursion", "Phishing Vector", "SQL Injection", "Ransomware Attempt", "Malware Probe"]
         threat_dist = [max(1, int(in_3 * f)) for f in [0.35, 0.25, 0.18, 0.14, 0.08]]
-        colors = ["#ef4444" if status_color == "red" else "#f59e0b" for _ in threat_dist]
+        colors = ["#dc2626" if status_color == "red" else "#d97706" for _ in threat_dist]
         
         fig1 = go.Figure(go.Bar(x=attack_types, y=threat_dist, marker_color=colors, name="Threat Incidents"))
-        fig1.update_layout(title=dict(text=f"Real Attack Vector Frequency (Dataset: cyber.csv) — {selected_city}", font=dict(color="#ffffff", size=11)))
-        dark_chart(fig1, height=225)
+        fig1.update_layout(title=dict(text=f"Real Attack Vector Frequency (Dataset: cyber.csv) — {selected_city}", font=dict(color="#0f172a", size=12)))
+        light_chart(fig1, height=225)
         st.plotly_chart(fig1, use_container_width=True, config={"displayModeBar": False})
 
         hrs_c = [f"{i:02d}:00" for i in range(0, 24, 2)]
         load_curve = [int(in_1 * f) for f in [0.25, 0.2, 0.18, 0.22, 0.45, 0.75, 1.15, 1.4, 1.5, 1.25, 0.95, 0.5]]
         fig2 = go.Figure(go.Scatter(x=hrs_c, y=load_curve, mode='lines+markers', name="Network Traffic (MB/s)", 
-                                    line=dict(color="#ef4444" if status_color == "red" else "#38bdf8", width=2.5)))
-        fig2.add_hline(y=1800, line_dash="dash", line_color="#ef4444", annotation_text="⚠️ Firewall Saturation Threshold", annotation_position="top right", annotation_font_color="#ef4444")
-        fig2.update_layout(title=dict(text="Network Bandwidth & Detected Anomaly Spikes (MB/s)", font=dict(color="#ffffff", size=11)))
-        dark_chart(fig2, height=225)
+                                    line=dict(color="#dc2626" if status_color == "red" else "#0284c7", width=2.5)))
+        fig2.add_hline(y=1800, line_dash="dash", line_color="#dc2626", annotation_text="⚠️ Firewall Saturation Threshold", annotation_position="top right", annotation_font_color="#dc2626")
+        fig2.update_layout(title=dict(text="Network Bandwidth & Detected Anomaly Spikes (MB/s)", font=dict(color="#0f172a", size=12)))
+        light_chart(fig2, height=225)
         st.plotly_chart(fig2, use_container_width=True, config={"displayModeBar": False})
 
     # -------------------------------------------------------------
@@ -775,10 +790,10 @@ with plot_col:
     elif selected_theme == "📱 Social Media":
         apps = ["Instagram", "Twitter / X", "Facebook", "LinkedIn", "YouTube", "Snapchat"]
         eng_rates = [round(float(in_4) * f, 1) for f in [1.35, 1.1, 0.85, 0.65, 1.45, 0.9]]
-        fig1 = go.Figure(go.Bar(x=apps, y=eng_rates, marker_color="#818cf8", name="Engagement Rate (%)"))
-        fig1.add_hline(y=5.0, line_dash="dash", line_color="#10b981", annotation_text="⭐ High Engagement Benchmark (5%)", annotation_position="top right", annotation_font_color="#10b981")
-        fig1.update_layout(title=dict(text=f"Platform Engagement Rate (%) from social_media.csv — {selected_city}", font=dict(color="#ffffff", size=11)))
-        dark_chart(fig1, height=225)
+        fig1 = go.Figure(go.Bar(x=apps, y=eng_rates, marker_color="#6366f1", name="Engagement Rate (%)"))
+        fig1.add_hline(y=5.0, line_dash="dash", line_color="#059669", annotation_text="⭐ High Engagement Benchmark (5%)", annotation_position="top right", annotation_font_color="#059669")
+        fig1.update_layout(title=dict(text=f"Platform Engagement Rate (%) from social_media.csv — {selected_city}", font=dict(color="#0f172a", size=12)))
+        light_chart(fig1, height=225)
         st.plotly_chart(fig1, use_container_width=True, config={"displayModeBar": False})
 
         weeks = [f"Week {i}" for i in range(1, 9)]
@@ -786,17 +801,16 @@ with plot_col:
         predicted_viral = [int(in_1 * (1.0 + (in_4 / 10.0) * (i * 0.15))) for i in range(8)]
         
         fig2 = go.Figure()
-        fig2.add_trace(go.Scatter(x=weeks, y=organic, name="Organic Baseline", line=dict(color="#64748b", width=1.5, dash='dot')))
-        fig2.add_trace(go.Scatter(x=weeks, y=predicted_viral, name="🤖 Predicted Viral Reach", line=dict(color="#38bdf8", width=2.5), mode='lines+markers'))
-        fig2.update_layout(title=dict(text="Citizen Outreach & AI Viral Growth Trajectory", font=dict(color="#ffffff", size=11)))
-        dark_chart(fig2, height=225)
+        fig2.add_trace(go.Scatter(x=weeks, y=organic, name="Organic Baseline", line=dict(color="#94a3b8", width=1.5, dash='dot')))
+        fig2.add_trace(go.Scatter(x=weeks, y=predicted_viral, name="🤖 Predicted Viral Reach", line=dict(color="#0284c7", width=2.5), mode='lines+markers'))
+        fig2.update_layout(title=dict(text="Citizen Outreach & AI Viral Growth Trajectory", font=dict(color="#0f172a", size=12)))
+        light_chart(fig2, height=225)
         st.plotly_chart(fig2, use_container_width=True, config={"displayModeBar": False})
 
     # -------------------------------------------------------------
     # 6. ENVIRONMENT CHARTS (REAL DATASET + PREDICTION WORKABLE)
     # -------------------------------------------------------------
     elif selected_theme == "🌱 Environment":
-        # Multi-pollutant profile vs CPCB National Ambient Air Quality Standards
         p_data = city_prof["pollutants"]
         p_names = ["PM2.5", "PM10", "NO2", "SO2", "CO", "OZONE", "NH3"]
         cpcb_limits = [60, 100, 80, 80, 25, 100, 100]
@@ -820,28 +834,26 @@ with plot_col:
             else:
                 city_vals.append(8.0)
 
-        # Bar comparison of actual vs standard
         fig1 = go.Figure()
         fig1.add_trace(go.Bar(
             x=p_names, 
             y=city_vals, 
             name=f"Current City Reading ({selected_city})", 
-            marker_color=["#ef4444" if cv > lim else "#38bdf8" for cv, lim in zip(city_vals, cpcb_limits)]
+            marker_color=["#dc2626" if cv > lim else "#0284c7" for cv, lim in zip(city_vals, cpcb_limits)]
         ))
         fig1.add_trace(go.Bar(
             x=p_names, 
             y=cpcb_limits, 
             name="CPCB Standard Limit", 
-            marker_color="rgba(100, 116, 139, 0.45)"
+            marker_color="rgba(148, 163, 184, 0.45)"
         ))
         fig1.update_layout(
             barmode='group',
-            title=dict(text=f"Real Multi-Pollutants vs National Standards (data/air_quality.csv)", font=dict(color="#ffffff", size=11))
+            title=dict(text=f"Real Multi-Pollutants vs National Standards (data/air_quality.csv)", font=dict(color="#0f172a", size=12))
         )
-        dark_chart(fig1, height=225)
+        light_chart(fig1, height=225)
         st.plotly_chart(fig1, use_container_width=True, config={"displayModeBar": False})
 
-        # 14-Day AQI Forecast based on live inputs & CPCB categories
         days = [f"Day {i}" for i in range(1, 15)]
         aq_curve = [max(15, int(comp_aqi * f)) for f in [0.90, 0.88, 0.92, 0.96, 1.05, 1.18, 1.25, 1.14, 1.02, 0.95, 0.88, 0.82, 0.86, 0.91]]
         
@@ -850,17 +862,17 @@ with plot_col:
             y=aq_curve, 
             mode='lines+markers', 
             name="14-Day AQI Forecast", 
-            line=dict(color="#ef4444" if comp_aqi >= 200 else "#f59e0b" if comp_aqi >= 100 else "#10b981", width=2.5)
+            line=dict(color="#dc2626" if comp_aqi >= 200 else "#d97706" if comp_aqi >= 100 else "#059669", width=2.5)
         ))
-        fig2.add_hline(y=100, line_dash="dash", line_color="#10b981", annotation_text="CPCB Satisfactory (100)", annotation_position="bottom right", annotation_font_color="#10b981")
-        fig2.add_hline(y=200, line_dash="dash", line_color="#f59e0b", annotation_text="Moderate Limit (200)", annotation_position="top right", annotation_font_color="#f59e0b")
-        fig2.add_hline(y=300, line_dash="dash", line_color="#ef4444", annotation_text="⚠️ Severe Smog Alert (300)", annotation_position="top right", annotation_font_color="#ef4444")
-        fig2.update_layout(title=dict(text=f"14-Day AQI Forecast & CPCB Risk Threshold Bands — {selected_city}", font=dict(color="#ffffff", size=11)))
-        dark_chart(fig2, height=225)
+        fig2.add_hline(y=100, line_dash="dash", line_color="#059669", annotation_text="CPCB Satisfactory (100)", annotation_position="bottom right", annotation_font_color="#059669")
+        fig2.add_hline(y=200, line_dash="dash", line_color="#d97706", annotation_text="Moderate Limit (200)", annotation_position="top right", annotation_font_color="#d97706")
+        fig2.add_hline(y=300, line_dash="dash", line_color="#dc2626", annotation_text="⚠️ Severe Smog Alert (300)", annotation_position="top right", annotation_font_color="#dc2626")
+        fig2.update_layout(title=dict(text=f"14-Day AQI Forecast & CPCB Risk Threshold Bands — {selected_city}", font=dict(color="#0f172a", size=12)))
+        light_chart(fig2, height=225)
         st.plotly_chart(fig2, use_container_width=True, config={"displayModeBar": False})
 
 with side_col:
-    # Action Recommendations & Directives (Clean Prominent Card)
+    # Action Recommendations & Directives (Clean Light Card)
     st.markdown("### 💡 Recommended Actions & Directives")
     
     badge_class = "badge-red" if status_color == "red" else "badge-orange" if status_color == "orange" else "badge-green"
@@ -1011,34 +1023,34 @@ with side_col:
 
     st.markdown(f"""
         <div class="rec-meta">
-            <div>Lead Agency: <b style="color:#ffffff;">{dept}</b></div>
-            <div>SLA: <b style="color:#38bdf8;">{sla}</b></div>
+            <div>Lead Agency: <b style="color:#0f172a;">{dept}</b></div>
+            <div>SLA: <b style="color:#0284c7;">{sla}</b></div>
         </div>
     </div>
     """, unsafe_allow_html=True)
 
 # ============================================================
-# COMPACT DATA SUMMARY CARD
+# COMPACT DATA SUMMARY CARD (LIGHT THEME)
 # ============================================================
 st.markdown("### 📋 Data Summary")
 st.markdown(f"""
 <div class="glass-card" style="margin-top: 4px; padding: 14px 20px;">
     <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; text-align: left;">
         <div>
-            <div style="font-size: 11px; color: #94a3b8; text-transform: uppercase;">Active Theme</div>
-            <div style="font-size: 14px; font-weight: 700; color: #ffffff; margin-top: 2px;">{selected_theme}</div>
+            <div style="font-size: 11px; color: #64748b; text-transform: uppercase; font-weight:700;">Active Theme</div>
+            <div style="font-size: 14px; font-weight: 700; color: #0f172a; margin-top: 2px;">{selected_theme}</div>
         </div>
         <div>
-            <div style="font-size: 11px; color: #94a3b8; text-transform: uppercase;">Selected City</div>
-            <div style="font-size: 14px; font-weight: 700; color: #38bdf8; margin-top: 2px;">{selected_city}, {city_prof['state']}</div>
+            <div style="font-size: 11px; color: #64748b; text-transform: uppercase; font-weight:700;">Selected City</div>
+            <div style="font-size: 14px; font-weight: 700; color: #0284c7; margin-top: 2px;">{selected_city}, {city_prof['state']}</div>
         </div>
         <div>
-            <div style="font-size: 11px; color: #94a3b8; text-transform: uppercase;">Telemetry Records</div>
-            <div style="font-size: 14px; font-weight: 700; color: #ffffff; margin-top: 2px;">{total_records:,} Records</div>
+            <div style="font-size: 11px; color: #64748b; text-transform: uppercase; font-weight:700;">Telemetry Records</div>
+            <div style="font-size: 14px; font-weight: 700; color: #0f172a; margin-top: 2px;">{total_records:,} Records</div>
         </div>
         <div>
-            <div style="font-size: 11px; color: #94a3b8; text-transform: uppercase;">Telemetry Status</div>
-            <div style="font-size: 14px; font-weight: 700; color: #10b981; margin-top: 2px;">🟢 Live Streaming ({datetime.now().strftime('%H:%M:%S IST')})</div>
+            <div style="font-size: 11px; color: #64748b; text-transform: uppercase; font-weight:700;">Telemetry Status</div>
+            <div style="font-size: 14px; font-weight: 700; color: #059669; margin-top: 2px;">🟢 Live Streaming ({datetime.now().strftime('%H:%M:%S IST')})</div>
         </div>
     </div>
 </div>
