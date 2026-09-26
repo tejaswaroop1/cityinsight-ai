@@ -226,17 +226,15 @@ st.markdown("""
         display: flex;
         align-items: center;
         gap: 12px;
-        flex-wrap: wrap;
     }
     .brand-title {
-        font-size: 26px;
+        font-size: 28px;
         font-weight: 800;
         color: #0f172a;
         line-height: 1.15;
         letter-spacing: -0.5px;
     }
     .brand-title span { color: #0284c7; }
-    .brand-sub { font-size: 11.5px; color: #475569; font-weight: 600; margin-top: 2px; }
     
     /* Modern Light Cards */
     .glass-card {
@@ -409,13 +407,15 @@ st.markdown("""
             max-width: 100% !important;
         }
         .brand-wrap {
+            justify-content: center !important;
+            text-align: center !important;
+            width: 100% !important;
+            margin: 0 auto 10px auto !important;
             gap: 10px;
         }
         .brand-title {
-            font-size: 22px !important;
-        }
-        .brand-sub {
-            font-size: 11px !important;
+            font-size: 24px !important;
+            text-align: center !important;
         }
         .kpi-grid {
             grid-template-columns: repeat(2, 1fr) !important;
@@ -499,10 +499,7 @@ with hdr_c1:
     st.markdown("""
     <div class="brand-wrap">
         <div style="font-size:36px; line-height:1;">🛡️</div>
-        <div>
-            <div class="brand-title">Civic<span>guard</span></div>
-            <div class="brand-sub">AI-Powered Multi-Domain Urban Intelligence • College Hackathon Edition</div>
-        </div>
+        <div class="brand-title">Civic<span>guard</span></div>
     </div>
     """, unsafe_allow_html=True)
 
